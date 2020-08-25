@@ -1,0 +1,32 @@
+<resources>
+
+    <!--自定义万能布局Dialog 背景透明-->
+    <style name="zxy_MyDilog" parent="Theme.AppCompat.Dialog">
+        <!--设置window的窗口背景为透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--    折叠动画-->
+    <style name="zxy_fold">
+        <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_fold</item>
+        <item name="android:windowExitAnimation">@anim/zxt_dialog_exit_anim_fold</item>
+    </style>
+
+    <!--    中心缩放动画-->
+    <style name="zxy_zoom">
+        <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_zoom</item>
+        <item name="android:windowExitAnimation">@anim/zxt_dialog_exit_anim_zoom</item>
+    </style>
+
+    <!--    底部弹出动画-->
+    <style name="zxy_translate_bottom">
+        <item name="android:windowEnterAnimation">@anim/zxy_dialog_enter_translate_bottom</item>
+        <item name="android:windowExitAnimation">@anim/zxy_dialog_exit_translate_bottom</item>
+    </style>
+
+    <!--    顶部弹出动画-->
+    <style name="zxy_translate_top">
+        <item name="android:windowEnterAnimation">@anim/zxy_dialog_enter_translate_top</item>
+        <item name="android:windowExitAnimation">@anim/zxy_dialog_exit_translate_top</item>
+    </style>
+</resources>
