@@ -1,0 +1,3 @@
+include ':zxydialog'
+include ':app'
+rootProject.name = "DialogDemo"
