@@ -40,13 +40,6 @@ class AlertDialogUtils private constructor() {
         var content: String? = null
 
         /**
-         * 自定义接口
-         */
-        interface AlertDialogUtilsListener {
-            fun onClickDialog(view: View, alertDialogUtils: AlertDialogUtils)
-        }
-
-        /**
          * 设置布局
          * @param layoutView View
          */
@@ -98,7 +91,7 @@ class AlertDialogUtils private constructor() {
          * 创建自定义布局的AlertDialog
          */
         fun create(block: (View, AlertDialogUtils) -> Unit): AlertDialogUtils {
-            if (alertDialogUtils.dialog!=null){
+            if (alertDialogUtils.alertDilaogBuilder != null) {
                 alertDialogUtils.dismiss()
             }
             alertDialogUtils.alertDilaogBuilder = AlertDialog.Builder(mContext, R.style.zxy_MyDilog)
