@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
 import com.zxy.zxydialog.AlertDialogUtils
-import com.zxy.zxydialog.AnimatorEnum
+import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.PopWindowUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,11 +23,11 @@ class MainActivity : AppCompatActivity() {
                 .create { view, alertDialogUtils ->
                     when (view.id) {
                         com.zxy.zxydialog.R.id.tvDialogConfig -> {
-                            alertDialogUtils.cancel()
+                            alertDialogUtils.dismiss()
                             Toast.makeText(this, "tvDialogConfig", Toast.LENGTH_LONG).show()
                         }
                         com.zxy.zxydialog.R.id.tvDialogCancel -> {
-                            alertDialogUtils.cancel()
+                            alertDialogUtils.dismiss()
                             Toast.makeText(this, "tvDialogCancel", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -37,16 +37,16 @@ class MainActivity : AppCompatActivity() {
         btnDialog1.setOnClickListener {
             AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)
-                .setAnimator(AnimatorEnum.TRAN_B.VALUE)
+                .setAnimator(AnimatorEnum.TRAN_T.VALUE)
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)
                 .create { view, alertDialogUtils ->
                     when (view.id) {
                         R.id.tvDialogConfig -> {
-                            alertDialogUtils.cancel()
+                            alertDialogUtils.dismiss()
                             Toast.makeText(this, "tvDialogConfig", Toast.LENGTH_LONG).show()
                         }
                         R.id.tvDialogCancel -> {
-                            alertDialogUtils.cancel()
+                            alertDialogUtils.dismiss()
                             Toast.makeText(this, "tvDialogCancel", Toast.LENGTH_LONG).show()
                         }
                     }
@@ -55,26 +55,18 @@ class MainActivity : AppCompatActivity() {
 
         btnPop2.setOnClickListener {
             PopWindowUtils.build(this)
-                .setView(R.layout.dialog_curse)
-                .setGravity(Gravity.TOP)
-                .setTransparency(0.5f)
-                .setAnimator(AnimatorEnum.FOLD.VALUE)
-                .setTimer(2000)
-                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)
-                .create(btnPop2) { view, popupWindowUtils ->
-                    when (view.id) {
-                        R.id.tvDialogConfig -> {
-                            popupWindowUtils.dismiss()
-                            Toast.makeText(this, "tvDialogConfig", Toast.LENGTH_LONG).show()
-                        }
-                        R.id.tvDialogCancel -> {
-                            popupWindowUtils.dismiss()
-                            Toast.makeText(this, "tvDialogCancel", Toast.LENGTH_LONG).show()
-                        }
-                    }
+                .setView(R.layout.pop_curse) //设置布局 -必选
+                .setGravity(Gravity.TOP, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
+                .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全透明  1全黑
+                .isFocusable(false)//可选：默认true
+                .setAnimator(AnimatorEnum.TRAN_T_NO_B.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
+                .setTimer(3000)//可选：默认不倒计时
+//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//点击控件的ID -可选：默认没有点击事件
+                .showAtLocation { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
+
                 }
+
+
         }
-
-
     }
 }

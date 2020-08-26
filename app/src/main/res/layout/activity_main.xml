@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <Button
         android:id="@+id/btnDialog"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="dialog系统自带" />
 
     <Button
         android:id="@+id/btnDialog1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="dialog自定义" />
 
     <Button
         android:id="@+id/btnPop2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="pop自定义" />
+        android:text="3秒自动关闭POP" />
 
 </LinearLayout>

@@ -6,10 +6,15 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <!--    折叠动画-->
-    <style name="zxy_fold">
-        <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_fold</item>
-        <item name="android:windowExitAnimation">@anim/zxt_dialog_exit_anim_fold</item>
+    <!--    折叠动画B-->
+    <style name="zxy_fold_bottom">
+        <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_fold_bottom</item>
+        <item name="android:windowExitAnimation">@anim/zxt_dialog_exit_anim_fold_bottom</item>
+    </style>
+    <!--    折叠动画T-->
+    <style name="zxy_fold_top">
+        <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_fold_top</item>
+        <item name="android:windowExitAnimation">@anim/zxt_dialog_exit_anim_fold_top</item>
     </style>
 
     <!--    中心缩放动画-->
@@ -28,5 +33,10 @@
     <style name="zxy_translate_top">
         <item name="android:windowEnterAnimation">@anim/zxy_dialog_enter_translate_top</item>
         <item name="android:windowExitAnimation">@anim/zxy_dialog_exit_translate_top</item>
+    </style>
+    <!--    顶部弹出动画,没有退出动画-->
+    <style name="zxy_translate_top_no_bottom">
+        <item name="android:windowEnterAnimation">@anim/zxy_dialog_enter_translate_top</item>
+        <item name="android:windowExitAnimation">@anim/zxy_dialog_exit_alpha</item>
     </style>
 </resources>

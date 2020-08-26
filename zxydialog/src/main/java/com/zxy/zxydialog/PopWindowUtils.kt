@@ -3,8 +3,10 @@ package com.zxy.zxydialog
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.*
 import android.widget.PopupWindow
+import com.zxy.zxydialog.tools.AnimatorEnum
 
 
 /**
@@ -31,8 +33,10 @@ class PopWindowUtils {
         var isTouchable = true
         var isFocusable = true
         var isOutsideTouchable = false
-        var animator: Int? = null
-        var gravity: Int? = null
+        var animator: Int? = AnimatorEnum.FOLD_B.VALUE
+        var gravity: Int? = Gravity.TOP
+        var offsetWidth: Int = 0
+        var offsetHeight: Int = 0
         var transparency: Float = 0.8f
         var millisInFuture: Long? = null
 
@@ -73,6 +77,9 @@ class PopWindowUtils {
             return this
         }
 
+        /**
+         * 设置动画
+         */
         fun setAnimator(animator: Int): PopWindowUtils.Builder {
             this.animator = animator
             return this
@@ -88,8 +95,17 @@ class PopWindowUtils {
             return this
         }
 
-        fun setGravity(gravity: Int): PopWindowUtils.Builder {
+        /**
+         * 设置方向及宽高偏移值
+         */
+        fun setGravity(
+            gravity: Int,
+            offsetWidth: Int = 0,
+            offsetHeight: Int = 0
+        ): PopWindowUtils.Builder {
             this.gravity = gravity
+            this.offsetWidth = offsetWidth
+            this.offsetHeight = offsetHeight
             return this
         }
 
@@ -125,11 +141,19 @@ class PopWindowUtils {
 
 
         @SuppressLint("ClickableViewAccessibility")
-        fun create(viewLocation: View, block: (View, PopWindowUtils) -> Unit) {
+        fun showAsDropDown(viewLocation: View, block: (View, PopWindowUtils) -> Unit) {
+            if (popupWindowUtils.layoutView == null) {
+                Log.e("", mContext.resources.getString(R.string.zxy_no_view))
+                return
+            }
+
+            if (popupWindowUtils.popupWindow != null) {
+                popupWindowUtils.dismiss()
+            }
             popupWindowUtils.mContext = mContext
             popupWindowUtils.popupWindow = PopupWindow(
                 popupWindowUtils.layoutView,
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             popupWindowUtils.popupWindow!!.isTouchable = isTouchable
@@ -138,11 +162,78 @@ class PopWindowUtils {
 
             popupWindowUtils.popupWindow!!.isOutsideTouchable = isOutsideTouchable
 
-            popupWindowUtils.popupWindow!!.showAsDropDown(
-                viewLocation,
-                0,
-                0,
-                gravity !!
+            var height = 0
+            var width = 0
+            popupWindowUtils.layoutView?.measure(0, 0)
+            when (gravity) {
+                Gravity.TOP -> {
+                    height =
+                        -popupWindowUtils.layoutView?.measuredHeight!! - viewLocation.height + offsetHeight
+                    width = 0 + offsetWidth
+                }
+                Gravity.BOTTOM -> {
+                    height = offsetHeight
+                    width = offsetWidth
+                }
+                Gravity.LEFT -> {
+                    height = -popupWindowUtils.layoutView?.measuredHeight!! + offsetHeight
+                    width = -popupWindowUtils.layoutView?.measuredWidth!! + offsetHeight
+                }
+                Gravity.RIGHT -> {
+                    height = -popupWindowUtils.layoutView?.measuredHeight!! + offsetHeight
+                    width = viewLocation.width + offsetHeight
+                }
+            }
+            popupWindowUtils.popupWindow!!.showAsDropDown(viewLocation, width, height)
+            if (millisInFuture != null)
+                mTimer.start()
+            if (popupWindowUtils.listView != null) {
+                for (index in 0 until popupWindowUtils.listView!!.size step 1) {
+                    popupWindowUtils.layoutView!!.findViewById<View>(popupWindowUtils.listView!![index])
+                        .setOnClickListener {
+                            block(it, popupWindowUtils)
+                        }
+                }
+            }
+            //设置遮罩层
+            popupWindowUtils.backgroundAlpha(transparency)
+            popupWindowUtils.popupWindow!!.setOnDismissListener {
+                popupWindowUtils.backgroundAlpha(1f)
+                //**重点，清理掉浮动的遮罩层，否则使用转场动画的时候会有黑色背景，因为dismiss是隐藏不是销毁
+                mContext?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            }
+
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        fun showAtLocation(block: (View, PopWindowUtils) -> Unit) {
+            if (popupWindowUtils.layoutView == null) {
+                Log.e("", mContext.resources.getString(R.string.zxy_no_view))
+                return
+            }
+            if (popupWindowUtils.popupWindow != null) {
+                popupWindowUtils.dismiss()
+
+            }
+            popupWindowUtils.mContext = mContext
+            popupWindowUtils.popupWindow = PopupWindow(
+                popupWindowUtils.layoutView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            popupWindowUtils.popupWindow!!.isTouchable = isTouchable
+            popupWindowUtils.popupWindow!!.isFocusable = isFocusable
+            popupWindowUtils.popupWindow!!.animationStyle = animator ?: AnimatorEnum.TRAN_B.VALUE
+
+            popupWindowUtils.popupWindow!!.isOutsideTouchable = isOutsideTouchable
+
+            var height = 0
+            var width = 0
+            popupWindowUtils.popupWindow!!.showAtLocation(
+                mContext.window.decorView,
+                width,
+                height,
+                gravity ?: Gravity.TOP
             )
             if (millisInFuture != null)
                 mTimer.start()

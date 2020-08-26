@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="zxy_dialog_cancel">取消</string>
+	<string name="zxy_dialog_config">确认</string>
+	<string name="zxy_no_view">没有设置setView的布局</string>
+</resources>

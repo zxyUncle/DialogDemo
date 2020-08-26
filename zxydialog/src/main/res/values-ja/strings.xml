@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="zxy_dialog_cancel">キャンセル</string>
+	<string name="zxy_dialog_config">確認</string>
+	<string name="zxy_no_view">setviewコマンドのレイアウトを設定しないでください</string>
+</resources>

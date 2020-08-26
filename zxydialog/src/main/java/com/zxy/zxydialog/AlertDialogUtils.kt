@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
+import com.zxy.zxydialog.tools.AnimatorEnum
 import kotlinx.android.synthetic.main.zxy_alert_dialog.view.*
 
 
@@ -98,6 +98,9 @@ class AlertDialogUtils private constructor() {
          * 创建自定义布局的AlertDialog
          */
         fun create(block: (View, AlertDialogUtils) -> Unit): AlertDialogUtils {
+            if (alertDialogUtils.dialog!=null){
+                alertDialogUtils.dismiss()
+            }
             alertDialogUtils.alertDilaogBuilder = AlertDialog.Builder(mContext, R.style.zxy_MyDilog)
             if (alertDialogUtils.layoutView == null) {//自带的dialog
                 setView(R.layout.zxy_alert_dialog)
@@ -139,7 +142,7 @@ class AlertDialogUtils private constructor() {
     }
 
 
-    fun cancel() {
+    fun dismiss() {
         if (dialog != null)
             dialog!!.cancel()
         if (alertDilaogBuilder != null)
