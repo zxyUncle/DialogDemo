@@ -86,7 +86,7 @@ class PopWindowUtils {
         }
 
         /**
-         * 设置窗口透明度，默认0.5    0为全透明  1全黑
+         * 设置窗口透明度，默认0.5    0为全黑  1全透明
          * @param transparency Float
          * @return Builder
          */
@@ -122,7 +122,7 @@ class PopWindowUtils {
          * 外部点击事件
          */
         @SuppressLint("ClickableViewAccessibility")
-        fun setExternalListener(block: () -> Unit) {
+        fun setExternalListener(block: () -> Unit):PopWindowUtils.Builder {
             popupWindowUtils.popupWindow?.setTouchInterceptor { v, event ->
                 if (event.y >= 0) {//PopupWindow内部的事件
                     false
@@ -131,7 +131,7 @@ class PopWindowUtils {
                 }
                 false
             }
-
+            return this
         }
 
         fun setTimer(millisInFuture: Long): PopWindowUtils.Builder {

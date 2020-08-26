@@ -17,6 +17,12 @@
         <item name="android:windowExitAnimation">@anim/zxt_dialog_exit_anim_fold_top</item>
     </style>
 
+    <!--    折叠动画T,没有退出动画-->
+    <style name="zxy_fold_top_no_bottom">
+        <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_fold_top</item>
+        <item name="android:windowExitAnimation">@anim/zxy_dialog_exit_alpha</item>
+    </style>
+
     <!--    中心缩放动画-->
     <style name="zxy_zoom">
         <item name="android:windowEnterAnimation">@anim/zxt_dialog_enter_anim_zoom</item>
