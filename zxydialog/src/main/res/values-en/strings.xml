@@ -3,4 +3,5 @@
 	<string name="zxy_dialog_cancel">cancel</string>
 	<string name="zxy_dialog_config">confirm</string>
 	<string name="zxy_no_view">Do not set the layout of setView</string>
+	<string name="zxy_loading">Loading...</string>
 </resources>

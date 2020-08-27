@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.PopWindowUtils
+import com.zxy.zxydialog.tools.LoadingTool
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
