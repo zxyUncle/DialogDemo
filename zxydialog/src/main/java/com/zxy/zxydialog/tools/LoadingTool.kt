@@ -42,6 +42,7 @@ class LoadingTool {
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel(title)
                 .setCancellable(true)
+                .setAutoDismiss(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.1f)
                 .show()
