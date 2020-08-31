@@ -56,21 +56,18 @@ class MainActivity : AppCompatActivity() {
 
         btnPop2.setOnClickListener {
             LoadingTool.instance().show(this)
-//            PopWindowUtils.build(this)
-//                .setView(R.layout.pop_curse) //设置布局 -必选
-//                .setGravity(Gravity.TOP, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
-//                .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全黑  1全透明
-//                .isFocusable(false)//可选：默认true
-//                .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
-//                .setTimer(3000)//可选：默认不倒计时
-//                .setExternalListener {  } //外部点击事件的监听
-////                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//点击控件的ID -可选：默认没有点击事件
-//                .showAtLocation { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
-//
-//                }
+            PopWindowUtils.build(this)
+                .setView(R.layout.pop_curse) //设置布局 -必选
+                .setGravity(Gravity.TOP, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
+                .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全黑  1全透明
+                .isFocusable(false)//可选：默认true
+                .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
+                .setTimer(3000)//可选：默认不倒计时
+                .setExternalListener { } //外部点击事件的监听
+//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//点击控件的ID -可选：默认没有点击事件
+                .showAtLocation { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
 
-
-
+                }
 
         }
     }
