@@ -25,5 +25,17 @@
         android:layout_height="wrap_content"
         android:text="3秒自动关闭POP" />
 
+    <Button
+        android:id="@+id/btnPop3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TToast" />
+
+    <Button
+        android:id="@+id/btnPop4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ZToast" />
+
 
 </LinearLayout>

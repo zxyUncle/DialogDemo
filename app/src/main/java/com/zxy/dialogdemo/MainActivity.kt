@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import com.zxy.ztoast.snackbar.ZToast
 import com.zxy.zxydialog.AlertDialogUtils
-import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.PopWindowUtils
+import com.zxy.zxydialog.TToast
+import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.LoadingTool
+import com.zxy.zxydialog.tools.MyToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -68,7 +70,15 @@ class MainActivity : AppCompatActivity() {
                 .showAtLocation { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
 
                 }
-
         }
+
+        btnPop3.setOnClickListener {
+            TToast.show("请输入正确的手机号")
+        }
+        btnPop4.setOnClickListener {
+            ZToast.setColorI("#000000")
+            ZToast.showI(this,"网路错误")
+        }
+
     }
 }
