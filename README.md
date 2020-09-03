@@ -46,7 +46,7 @@ Step 1
                 .setView(R.layout.dialog_curse)
                 .create { view, alertDialogUtils ->}
 
-3）、Dialog的属性
+3）、Dialog的全部属性
 
       .setView(R.layout.dialog_curse)//必选                         自定义布局的View
                 .setTransparency(0.2f)//可选                                  默认0.2f
@@ -54,10 +54,31 @@ Step 1
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
                 .create { view, alertDialogUtils -> //必选                    点击事件的回调
+4）可选的动画
 
-      
+    FOLD_B(R.style.zxy_fold_bottom),  //折叠动画Bottom
+    FOLD_T(R.style.zxy_fold_top),  //折叠动画Top
+    FOLD_T_NO_B(R.style.zxy_fold_top_no_bottom),  //折叠动画Top,没有退出动画
+    ZOOM(R.style.zxy_zoom),  //中心缩放动画
+    TRAN_B(R.style.zxy_translate_bottom),  //底部弹出动画
+    TRAN_T(R.style.zxy_translate_top),  //顶部弹出动画
+    TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
+
+
 4、Popwindow
------     
+-----
+1）最简单的使用相对于窗口的位置
+
+      PopWindowUtils.build(this)
+                .setView(R.layout.pop_curse) //必选
+                .showAtLocation {view, popWindowUtils -> }
+2）最简单的使用相对于View的位置
+
+     PopWindowUtils.build(this)
+                .setView(R.layout.pop_curse) //必选
+                .showAsDropDown(locationView) {view, popWindowUtils -> }
+
+3)Popwindow的全部属性
 
      var mPop=PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选                              设置布局
@@ -76,3 +97,14 @@ Step 1
             mPop.setExternalListener {
                 ZToast.showI(this,"外部点击")
             }
+
+4）可选的动画
+
+    FOLD_B(R.style.zxy_fold_bottom),  //折叠动画Bottom
+    FOLD_T(R.style.zxy_fold_top),  //折叠动画Top
+    FOLD_T_NO_B(R.style.zxy_fold_top_no_bottom),  //折叠动画Top,没有退出动画
+    ZOOM(R.style.zxy_zoom),  //中心缩放动画
+    TRAN_B(R.style.zxy_translate_bottom),  //底部弹出动画
+    TRAN_T(R.style.zxy_translate_top),  //顶部弹出动画
+    TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
+
