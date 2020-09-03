@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                         ZToast.showI(this,"点击事件")
                     }
                 }
-            //点击外部的监听
+            //点击外部销毁Pop的监听
             mPop.setExternalListener {
                 ZToast.showI(this,"外部点击")
             }

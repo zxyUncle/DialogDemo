@@ -59,7 +59,7 @@ Step 1
 4、Popwindow
 -----     
 
-     PopWindowUtils.build(this)
+     var mPop=PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选                              设置布局
                 .setGravity(Gravity.TOP, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
                 .setTransparency(1f)//可选：                                      默认0.5    0为全黑  1全透明
@@ -72,3 +72,7 @@ Step 1
                 .showAtLocation { view, popWindowUtils ->  //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
 
                 }
+                 //点击外部销毁Pop的监听
+            mPop.setExternalListener {
+                ZToast.showI(this,"外部点击")
+            }
