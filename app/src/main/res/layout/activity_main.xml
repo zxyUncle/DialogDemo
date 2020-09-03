@@ -18,6 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="dialog自定义" />
+    <Button
+        android:id="@+id/btnPopWindows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="POP——Select" />
 
     <Button
         android:id="@+id/btnPop2"
@@ -36,6 +41,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ZToast" />
+    <Button
+        android:id="@+id/btnPop5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加载中" />
 
 
 </LinearLayout>
