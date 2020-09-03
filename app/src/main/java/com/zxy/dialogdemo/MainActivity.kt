@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 .setView(R.layout.pop_curse) //设置布局 -必选
                 .setGravity(Gravity.TOP, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
                 .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全黑  1全透明
-                .setPopWidthHeight(PopWindowUtils.WRAP,PopWindowUtils.WRAP)
+                .setPopWidthHeight(PopWindowUtils.MATCH,PopWindowUtils.WRAP)
                 .isFocusable(false)//可选：默认true
                 .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选：默认不倒计时
