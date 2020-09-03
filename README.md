@@ -19,14 +19,17 @@ Step 1
 -----   
 
      TToast.show("请输入正确的手机号")
+![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/TToast.gif)
+
 2、顶部弹出的Toast
------   
+-----
       ZToast.setColorI("#000000")//可选 设置弹出的颜色
       ZToast.showI(this,"网路错误")
+![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ZToast.gif)
 
 3、Dialog
------      
-1）、系统自带的Dialog：        
+-----
+1）、系统自带的Dialog：
 
       AlertDialogUtils.build(this)
                 .setValues("Title", "Content")
@@ -39,12 +42,15 @@ Step 1
                     }
                     alertDialogUtils.dismiss()
                 }
+![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自带Dialog.gif)
 
 2）、自定义ViewDialog
 
       AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)
                 .create { view, alertDialogUtils ->}
+
+![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自定义ViewDialog.gif)
 
 3）、Dialog的全部属性
 
@@ -54,6 +60,7 @@ Step 1
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
                 .create { view, alertDialogUtils -> //必选                    点击事件的回调
+
 4）可选的动画
 
     FOLD_B(R.style.zxy_fold_bottom),  //折叠动画Bottom
@@ -72,11 +79,16 @@ Step 1
       PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选
                 .showAtLocation {view, popWindowUtils -> }
+
+![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/窗口Pop.gif)
+
 2）最简单的使用相对于View的位置
 
      PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选
                 .showAsDropDown(locationView) {view, popWindowUtils -> }
+
+![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ViewPop.gif)
 
 3)Popwindow的全部属性
 
@@ -107,4 +119,3 @@ Step 1
     TRAN_B(R.style.zxy_translate_bottom),  //底部弹出动画
     TRAN_T(R.style.zxy_translate_top),  //顶部弹出动画
     TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
-
