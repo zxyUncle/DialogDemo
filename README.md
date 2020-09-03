@@ -19,13 +19,15 @@ Step 1
 -----   
 
      TToast.show("请输入正确的手机号")
-![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/TToast.gif)
+
+[![](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/TToast.gif)](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/TToast.gif)
 
 2、顶部弹出的Toast
 -----
       ZToast.setColorI("#000000")//可选 设置弹出的颜色
       ZToast.showI(this,"网路错误")
-![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ZToast.gif)
+
+[![](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ZToast.gif)](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ZToast.gif)
 
 3、Dialog
 -----
@@ -42,7 +44,8 @@ Step 1
                     }
                     alertDialogUtils.dismiss()
                 }
-![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自带Dialog.gif)
+
+[![](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自带Dialog.gif)](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自带Dialog.gif)
 
 2）、自定义ViewDialog
 
@@ -50,7 +53,7 @@ Step 1
                 .setView(R.layout.dialog_curse)
                 .create { view, alertDialogUtils ->}
 
-![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自定义ViewDialog.gif)
+[![](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自定义ViewDialog.gif)](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/自定义ViewDialog.gif)
 
 3）、Dialog的全部属性
 
@@ -80,7 +83,7 @@ Step 1
                 .setView(R.layout.pop_curse) //必选
                 .showAtLocation {view, popWindowUtils -> }
 
-![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/窗口Pop.gif)
+[![](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/窗口Pop.gif)](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/窗口Pop.gif)
 
 2）最简单的使用相对于View的位置
 
@@ -88,7 +91,7 @@ Step 1
                 .setView(R.layout.pop_curse) //必选
                 .showAsDropDown(locationView) {view, popWindowUtils -> }
 
-![Image text](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ViewPop.gif)
+[![](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ViewPop.gif)](https://github.com/zxyUncle/DialogDemo/tree/master/dialog/ViewPop.gif)
 
 3)Popwindow的全部属性
 
