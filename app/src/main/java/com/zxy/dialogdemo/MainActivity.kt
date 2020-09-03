@@ -28,22 +28,26 @@ class MainActivity : AppCompatActivity() {
                 .create { view, alertDialogUtils ->
                     when (view.id) {
                         com.zxy.zxydialog.R.id.tvDialogConfig -> {
-                            alertDialogUtils.dismiss()
-                            Toast.makeText(this, "tvDialogConfig", Toast.LENGTH_LONG).show()
                         }
                         com.zxy.zxydialog.R.id.tvDialogCancel -> {
-                            alertDialogUtils.dismiss()
-                            Toast.makeText(this, "tvDialogCancel", Toast.LENGTH_LONG).show()
                         }
                     }
+                    alertDialogUtils.dismiss()
                 }
         }
         btnDialog1.setOnClickListener {
             AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)
-                .setAnimator(AnimatorEnum.TRAN_T.VALUE)
-                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)
-                .create { view, alertDialogUtils ->
+                .create { view, alertDialogUtils ->}
+
+
+            AlertDialogUtils.build(this)
+                .setView(R.layout.dialog_curse)//必选                         自定义布局的View
+                .setTransparency(0.2f)//可选                                  默认0.2f
+                .setCancelable(true) //可选                                   默认true
+                .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
+                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
+                .create { view, alertDialogUtils -> //必选                    点击事件的回调
                     when (view.id) {
                         R.id.tvDialogConfig -> {
                             alertDialogUtils.dismiss()
@@ -58,18 +62,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnPop2.setOnClickListener {
-            PopWindowUtils.build(this)
-                .setView(R.layout.pop_curse) //设置布局 -必选
-                .setGravity(Gravity.TOP, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
-                .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全黑  1全透明
-                .setPopWidthHeight(PopWindowUtils.MATCH,PopWindowUtils.WRAP)
-                .isFocusable(false)//可选：默认true
-                .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
-                .setTimer(3000)//可选：默认不倒计时
-//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//点击控件的ID -可选：默认没有点击事件
-                .showAtLocation { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
+                PopWindowUtils.build(this)
+                    .setView(R.layout.pop_curse) //必选                              设置布局
+                    .setGravity(Gravity.TOP, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
+                    .setTransparency(1f)//可选：                                      默认0.5    0为全黑  1全透明
+                    .setPopWidthHeight(PopWindowUtils.MATCH,PopWindowUtils.WRAP)//可选 默认w=Math，h=wrap
+                    .isFocusable(false)//可选：                            默认true
+                    .isTouchable(true)//可选：                             默认true
+                    .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
+                    .setTimer(3000)//可选                                             默认不倒计时自动销毁
+                    .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
+                    .showAtLocation { view, popWindowUtils ->  //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
 
-                }
+                    }
         }
 
         btnPop3.setOnClickListener {
