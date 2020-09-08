@@ -262,7 +262,7 @@ class PopWindowUtils {
     @SuppressLint("ClickableViewAccessibility")
     fun setExternalListener(block: (PopupWindow?) -> Unit) {
         popupWindow?.setTouchInterceptor { v, event ->
-            if (event.y <= v.height && event.y>0) {//PopupWindow内部的事件
+            if (event.y <= v.height && event.y > 0) {//PopupWindow内部的事件
                 false
             } else {//PopupWindow外部的事件
                 block(popupWindow)

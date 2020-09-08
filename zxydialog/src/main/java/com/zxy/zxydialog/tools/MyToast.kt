@@ -1,6 +1,7 @@
 package com.zxy.zxydialog.tools
 
 import android.annotation.SuppressLint
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -28,6 +29,7 @@ class MyToast {
         tvContent = view.findViewById(R.id.tvToastContent)
         toast = Toast(Applications.context())
         toast.view = view
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.duration = taktTime
     }
 
@@ -58,6 +60,26 @@ class MyToast {
                 cancel()
                 toast.show()
             }
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    fun show(layoutView: View) {
+        toast.view = layoutView
+        if (System.currentTimeMillis() - oldTime > taktTime) {//500秒外
+            toast.show()
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    fun show(layoutView: View, time: Int) {
+        toast.view = layoutView
+        toast.duration = time
+        if (System.currentTimeMillis() - oldTime > taktTime) {//500秒外
+            toast.show()
+        } else {//500秒内
+            cancel()
+            toast.show()
         }
     }
 

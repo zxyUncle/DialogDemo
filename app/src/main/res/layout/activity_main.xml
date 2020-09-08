@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
-
+    <Button
+        android:id="@+id/btnBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BottomSheetDialog" />
     <Button
         android:id="@+id/btnDialog"
         android:layout_width="wrap_content"
@@ -35,6 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TToast" />
+    <Button
+        android:id="@+id/btnTToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义布局TToast" />
 
     <Button
         android:id="@+id/btnPop4"
