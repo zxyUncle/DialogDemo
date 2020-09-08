@@ -20,6 +20,8 @@ Step 1
 
      TToast.show("请输入正确的手机号")
 
+     TToast.show(layoutView)//自定布局
+
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/TToast.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/TToast.gif)
 
 2、顶部弹出的Toast
