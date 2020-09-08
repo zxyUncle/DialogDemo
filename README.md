@@ -126,7 +126,7 @@ Step 1
     TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
 
 5、BottomSheetDialog底部弹出框，可以滑动
-
+-----
        BottomSheetDialogUtils.build(this)
                 .setView(R.layout.zxy_bottom_sheet_dialog)
                 .setMinHeight(0.8f)
