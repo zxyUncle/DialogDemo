@@ -38,11 +38,6 @@ class MainActivity : AppCompatActivity() {
         }
         btnDialog1.setOnClickListener {
             AlertDialogUtils.build(this)
-                .setView(R.layout.dialog_curse)
-                .create { view, alertDialogUtils -> }
-
-
-            AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)//必选                         自定义布局的View
                 .setTransparency(0.2f)//可选                                  默认0.2f
                 .setCancelable(true) //可选                                   默认true
@@ -72,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选                                             默认不倒计时自动销毁
-                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
+//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
                 .showAtLocation { view, popWindowUtils ->  //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
 
                 }
@@ -97,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                 .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全黑  1全透明
                 .setAnimator(AnimatorEnum.FOLD_T.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
                 //外部点击事件的监听
-                .setOnClick(R.id.tvDialgTitle)//点击控件的ID -可选：默认没有点击事件
+//                .setOnClick(R.id.tvDialgTitle)//点击控件的ID -可选：默认没有点击事件
                 .showAsDropDown(btnPopWindows) { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
                     if (view.id == R.id.tvDialgTitle) {
                         ZToast.showI(this, "点击事件")
