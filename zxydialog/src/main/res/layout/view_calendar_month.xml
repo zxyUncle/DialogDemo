@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mRvList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:background="@color/white"
+        android:scrollbars="none"
+        android:nestedScrollingEnabled="false">
+
+</androidx.recyclerview.widget.RecyclerView>

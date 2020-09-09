@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
-import com.zxy.ztoast.snackbar.ZToast
+import com.zxy.zxydialog.snackbar.ZToast
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.BottomSheetDialogUtils
 import com.zxy.zxydialog.PopWindowUtils

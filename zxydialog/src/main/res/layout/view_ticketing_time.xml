@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mRootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_80898989"
+    app:layout_optimizationLevel="standard|dimensions|chains">
+
+    <View
+        android:id="@+id/mView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mTvAllTime"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_f5f7f9_corners12"
+        android:gravity="center"
+        android:text="全部时间"
+        android:textColor="@color/color_333333"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/mView"
+        app:layout_constraintEnd_toStartOf="@id/mTvWeekend"
+        app:layout_constraintStart_toStartOf="@id/mView"
+        app:layout_constraintTop_toTopOf="@id/mView" />
+
+    <TextView
+        android:id="@+id/mTvWeekend"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_f5f7f9_corners12"
+        android:gravity="center"
+        android:text="本周末"
+        android:textColor="@color/color_333333"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/mView"
+        app:layout_constraintEnd_toStartOf="@id/mTvWithinWeek"
+        app:layout_constraintStart_toEndOf="@id/mTvAllTime"
+        app:layout_constraintTop_toTopOf="@id/mView" />
+
+    <TextView
+        android:id="@+id/mTvWithinWeek"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_f5f7f9_corners12"
+        android:gravity="center"
+        android:text="本周内"
+        android:textColor="@color/color_333333"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/mView"
+        app:layout_constraintEnd_toStartOf="@id/mTvWithinMonth"
+        app:layout_constraintStart_toEndOf="@id/mTvWeekend"
+        app:layout_constraintTop_toTopOf="@id/mView" />
+
+    <TextView
+        android:id="@+id/mTvWithinMonth"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_f5f7f9_corners12"
+        android:gravity="center"
+        android:text="本月内"
+        android:textColor="@color/color_333333"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/mView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mTvWithinWeek"
+        app:layout_constraintTop_toTopOf="@id/mView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRvWeek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mView" />
+
+    <View
+        android:id="@+id/mViewLine"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:background="@color/color_f5f7f9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mRvWeek" />
+
+    <TextView
+        android:id="@+id/mTvMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="15dp"
+        android:textColor="@color/color_333333"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/mViewLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mViewLine" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/mViewPager"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mViewLine" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

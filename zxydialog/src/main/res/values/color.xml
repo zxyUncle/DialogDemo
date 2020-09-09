@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 功能： -->
+<resources>
+
+    <color name="prompt_success">#000000</color>
+    <color name="prompt_error">#ff0000</color>
+    <color name="prompt_warning">#00574B</color>
+
+    <color name="color_80898989">#80898989</color>
+    <color name="white">#FFFFFF</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_f5f7f9">#f5f7f9</color>
+</resources>
