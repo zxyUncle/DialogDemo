@@ -7,6 +7,10 @@ import android.util.Log
 import android.view.*
 import android.widget.PopupWindow
 import com.zxy.zxydialog.tools.AnimatorEnum
+import android.graphics.drawable.BitmapDrawable
+import android.R.attr.name
+
+
 
 
 /**
@@ -111,7 +115,7 @@ class PopWindowUtils {
         fun setGravity(
             gravity: Int,
             offsetWidth: Int = 0,
-            offsetHeight: Int = 0,
+            offsetHeight: Int = 0
         ): Builder {
             this.gravity = gravity
             this.offsetWidth = offsetWidth
@@ -138,6 +142,7 @@ class PopWindowUtils {
         fun showAsDropDown(
             viewLocation: View,
             block: (View, PopWindowUtils) -> Unit,
+            onDismiss: (PopWindowUtils) -> Unit
         ): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
                 Log.e("", mContext.resources.getString(R.string.zxy_no_view))
@@ -153,11 +158,12 @@ class PopWindowUtils {
                 )
                 popupWindowUtils.popupWindow!!.isTouchable = isTouchable
                 popupWindowUtils.popupWindow!!.isFocusable = isFocusable
+                popupWindowUtils.popupWindow!!.isOutsideTouchable = isOutsideTouchable
+                //4.0/5.外部点击关闭处理
+                if(isOutsideTouchable)  popupWindowUtils.popupWindow!!.setBackgroundDrawable(BitmapDrawable())
+
                 popupWindowUtils.popupWindow!!.animationStyle =
                     animator ?: AnimatorEnum.TRAN_B.VALUE
-
-                popupWindowUtils.popupWindow!!.isOutsideTouchable = isOutsideTouchable
-
                 var height = 0
                 var width = 0
                 popupWindowUtils.layoutView?.measure(0, 0)
@@ -197,6 +203,7 @@ class PopWindowUtils {
                     popupWindowUtils.backgroundAlpha(1f)
                     //**重点，清理掉浮动的遮罩层，否则使用转场动画的时候会有黑色背景，因为dismiss是隐藏不是销毁
                     mContext?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                    onDismiss(popupWindowUtils)
                 }
 
             }
@@ -253,21 +260,6 @@ class PopWindowUtils {
                 }
             }
             return popupWindowUtils
-        }
-    }
-
-    /**
-     * 外部点击事件
-     */
-    @SuppressLint("ClickableViewAccessibility")
-    fun setExternalListener(block: (PopupWindow?) -> Unit) {
-        popupWindow?.setTouchInterceptor { v, event ->
-            if (event.y <= v.height && event.y > 0) {//PopupWindow内部的事件
-                false
-            } else {//PopupWindow外部的事件
-                block(popupWindow)
-            }
-            false
         }
     }
 

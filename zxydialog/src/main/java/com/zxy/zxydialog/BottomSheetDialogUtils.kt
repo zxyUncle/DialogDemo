@@ -5,7 +5,9 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.LinearLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -72,6 +74,7 @@ class BottomSheetDialogUtils {
                 } else {
                     getPeekHeight(mContext, 0.8f).toInt()
                 }
+                //外部包裹一层LinearLayout防止按比例不成功
                 layoutView?.rootView?.minimumHeight = heigit
                 bottomSheetDialog?.setContentView(bottomSheetDialogUtils.layoutView!!)
 
@@ -81,7 +84,6 @@ class BottomSheetDialogUtils {
                 bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
                 bottomSheetBehavior?.addBottomSheetCallback(object :BottomSheetCallback(){
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        Log.e("zxy",newState.toString())
                         if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                             bottomSheetDialog?.dismiss()
                             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -94,22 +96,6 @@ class BottomSheetDialogUtils {
                     }
 
                 })
-//                bottomSheetBehavior?.setBottomSheetCallback(object : BottomSheetCallback() {
-//                    override fun onStateChanged(view: View, i: Int) {
-//                        Log.e("zxy",i.toString())
-//                        if (i == BottomSheetBehavior.STATE_HIDDEN) {
-//                            bottomSheetDialog?.dismiss()
-//                            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-//                            block()//被关闭
-//                        }
-//                    }
-//
-//                    override fun onSlide(view: View, v: Float) {
-//                        if (v == -1.0f) {
-//                            block()//被关闭
-//                        }
-//                    }
-//                })
 
                 //设置透明背景
                 bottomSheetDialog?.window?.findViewById<View>(R.id.design_bottom_sheet)

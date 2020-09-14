@@ -31,7 +31,21 @@ Step 1
 
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/ZToast.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/ZToast.gif)
 
-3、Dialog
+3、加载中弹出框
+-----
+
+1)单个网路加载：
+
+        LoadingTool.instance().show(this) //显示
+        LoadingTool.instance().hide()//隐藏
+
+2）多个网路加载：
+
+        LoadingTool.instance().showMultistage(this)
+        LoadingTool.instance().hideMultistage()
+
+[![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/loading.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/loading.gif)
+4、Dialog
 -----
 1）、系统自带的Dialog：
 
@@ -77,7 +91,7 @@ Step 1
     TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
 
 
-4、Popwindow
+5、Popwindow
 -----
 1）最简单的使用相对于窗口的位置
 
@@ -125,9 +139,13 @@ Step 1
     TRAN_T(R.style.zxy_translate_top),  //顶部弹出动画
     TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
 
-5、BottomSheetDialog底部弹出框，可以滑动
+6、BottomSheetDialog底部弹出框，可以滑动
 -----
        BottomSheetDialogUtils.build(this)
                 .setView(R.layout.zxy_bottom_sheet_dialog)
                 .setMinHeight(0.8f)
                 .show()
+[![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/bottomdialog.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/bottomdialog.gif)
+
+
+

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import com.zxy.zxydialog.snackbar.ZToast
 import com.zxy.zxydialog.AlertDialogUtils
@@ -43,7 +44,8 @@ class MainActivity : AppCompatActivity() {
                 .setCancelable(true) //可选                                   默认true
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
-                .create { view, alertDialogUtils -> //必选                    点击事件的回调
+                .create { view, alertDialogUtils ->
+                    //必选                    点击事件的回调
                     when (view.id) {
                         R.id.tvDialogConfig -> {
                             alertDialogUtils.dismiss()
@@ -68,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                 .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选                                             默认不倒计时自动销毁
 //                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
-                .showAtLocation { view, popWindowUtils ->  //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
+                .showAtLocation { view, popWindowUtils ->
+                    //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
 
                 }
         }
@@ -81,8 +84,8 @@ class MainActivity : AppCompatActivity() {
             ZToast.showI(this, "网路错误")
         }
         btnPop5.setOnClickListener {
-            LoadingTool.instance().show(this)
-//            LoadingTool.instance().hide()
+            LoadingTool.instance().showMultistage(this)
+            LoadingTool.instance().hideMultistage()
         }
 
         btnPopWindows.setOnClickListener {
@@ -93,22 +96,18 @@ class MainActivity : AppCompatActivity() {
                 .setAnimator(AnimatorEnum.FOLD_T.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
                 //外部点击事件的监听
 //                .setOnClick(R.id.tvDialgTitle)//点击控件的ID -可选：默认没有点击事件
-                .showAsDropDown(btnPopWindows) { view, popWindowUtils ->  //点击事件的回调：view是点击控件的ID，popWindowUtils：通过他可以拿到任何东西
-                    if (view.id == R.id.tvDialgTitle) {
-                        ZToast.showI(this, "点击事件")
-                    }
-                }
-            //点击外部销毁Pop的监听
-            mPop.setExternalListener {
-                ZToast.showI(this, "外部点击")
-            }
+                .showAsDropDown(btnPopWindows, { view: View, popWindowUtils: PopWindowUtils ->
+
+                }, {
+
+                })
 
         }
 
         btnBottom.setOnClickListener {
             BottomSheetDialogUtils.build(this)
-                .setView(R.layout.zxy_bottom_sheet_dialog)
-                .setMinHeight(0.8f)
+                .setView(R.layout.bottom_sheet_dialog)
+                .setMinHeight(0.7f)
                 .show()
         }
         btnTToast.setOnClickListener {
