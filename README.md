@@ -139,11 +139,11 @@ Step 1
     TRAN_T(R.style.zxy_translate_top),  //顶部弹出动画
     TRAN_T_NO_B(R.style.zxy_translate_top_no_bottom)  //顶部弹出动画,没有退出动画
 
-6、BottomSheetDialog底部弹出框，可以滑动
+6、BottomSheetDialog底部弹出框，可以滑动（弹出框的根布局必须是-线性布局）
 -----
        BottomSheetDialogUtils.build(this)
                 .setView(R.layout.zxy_bottom_sheet_dialog)
-                .setMinHeight(0.8f)
+                .setMinHeight(0.8f)//弹出框的占屏幕的高度比例
                 .show()
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/bottomdialog.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/bottomdialog.gif)
 
