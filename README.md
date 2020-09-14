@@ -45,6 +45,7 @@ Step 1
         LoadingTool.instance().hideMultistage()
 
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/loading.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/loading.gif)
+
 4、Dialog
 -----
 1）、系统自带的Dialog：
@@ -97,7 +98,13 @@ Step 1
 
       PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选
-                .showAtLocation {view, popWindowUtils -> }
+                .showAtLocation({ view, popWindowUtils ->
+                    //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
+
+                }, {//销毁回调
+
+
+                })
 
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/窗口Pop.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/窗口Pop.gif)
 
@@ -105,7 +112,11 @@ Step 1
 
      PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选
-                .showAsDropDown(locationView) {view, popWindowUtils -> }
+                 .showAsDropDown(btnPopWindows, { view: View, popWindowUtils: PopWindowUtils ->//点击事件的回调
+
+                }, {//外部销毁的回调
+
+                })
 
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/ViewPop.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/ViewPop.gif)
 
@@ -146,6 +157,7 @@ Step 1
                 .setMinHeight(0.8f)//弹出框的占屏幕的高度比例
                 .show()
 [![](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/bottomdialog.gif)](https://raw.githubusercontent.com/zxyUncle/DialogDemo/master/dialog/bottomdialog.gif)
+
 
 
 

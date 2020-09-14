@@ -212,7 +212,8 @@ class PopWindowUtils {
         }
 
         @SuppressLint("ClickableViewAccessibility")
-        fun showAtLocation(block: (View, PopWindowUtils) -> Unit): PopWindowUtils {
+        fun showAtLocation(block: (View, PopWindowUtils) -> Unit,
+                           onDismiss: (PopWindowUtils) -> Unit): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
                 Log.e("", mContext.resources.getString(R.string.zxy_no_view))
             } else {
@@ -257,6 +258,7 @@ class PopWindowUtils {
                     popupWindowUtils.backgroundAlpha(1f)
                     //**重点，清理掉浮动的遮罩层，否则使用转场动画的时候会有黑色背景，因为dismiss是隐藏不是销毁
                     mContext?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                    onDismiss(popupWindowUtils)
                 }
             }
             return popupWindowUtils
