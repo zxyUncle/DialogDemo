@@ -78,24 +78,19 @@ class MainActivity : AppCompatActivity() {
 
                 })
         }
-
-        btnPop3.setOnClickListener
-        {
+        btnPop3.setOnClickListener {
             TToast.show("请输入正确的手机号")
         }
-        btnPop4.setOnClickListener
-        {
+        btnPop4.setOnClickListener {
             ZToast.setColorI("#000000")
             ZToast.showI(this, "网路错误")
         }
-        btnPop5.setOnClickListener
-        {
+        btnPop5.setOnClickListener {
             LoadingTool.instance().showMultistage(this)
             LoadingTool.instance().hideMultistage()
         }
 
-        btnPopWindows.setOnClickListener
-        {
+        btnPopWindows.setOnClickListener {
             var mPop = PopWindowUtils.build(this)
                 .setView(R.layout.pop_select) //设置布局 -必选
                 .setGravity(Gravity.BOTTOM, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
@@ -108,18 +103,15 @@ class MainActivity : AppCompatActivity() {
                 }, {
 
                 })
-
         }
 
-        btnBottom.setOnClickListener
-        {
+        btnBottom.setOnClickListener {
             BottomSheetDialogUtils.build(this)
                 .setView(R.layout.bottom_sheet_dialog)
                 .setMinHeight(0.7f)
                 .show()
         }
-        btnTToast.setOnClickListener
-        {
+        btnTToast.setOnClickListener {
             var layoutView =
                 LayoutInflater.from(Applications.context()).inflate(R.layout.toast_course, null)
             TToast.show(layoutView)
