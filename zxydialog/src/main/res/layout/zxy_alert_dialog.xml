@@ -20,9 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="模拟商品信息，难搞哦！！"
+            android:gravity="center"
+            android:text="Prompt"
             android:textColor="#333333"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
 
@@ -32,47 +33,57 @@
             android:layout_height="wrap_content"
             android:minHeight="100dp"
             android:padding="10dp"
-            android:text="模拟商品信息，难搞哦！！"
+            android:gravity="center"
+            android:text="Are you sure you want to open this coupon"
             android:textColor="#333333"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
+            android:background="#33666666"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDialogCancel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:padding="14dp"
                 android:text="@string/zxy_dialog_cancel"
-                android:textColor="#999999"
+                android:textColor="#3f89d2"
                 android:textSize="18dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/tvDialogConfig"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="lollipop" />
 
+            <View
+                android:background="#33666666"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/tvDialogConfig"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:padding="14dp"
                 android:text="@string/zxy_dialog_config"
-                android:textColor="#333333"
+                android:textColor="#3f89d2"
                 android:textSize="18dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:targetApi="lollipop" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
