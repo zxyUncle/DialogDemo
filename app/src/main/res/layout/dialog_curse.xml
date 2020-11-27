@@ -30,13 +30,13 @@
             />
 
 
-        <TextView
+        <EditText
             android:id="@+id/tvDialgContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="100dp"
             android:padding="10dp"
-            android:text="模拟商品信息，难搞哦！！"
+            android:hint="模拟商品信息，难搞哦！！"
             android:textColor="#333333"
             android:textSize="18sp"
             />

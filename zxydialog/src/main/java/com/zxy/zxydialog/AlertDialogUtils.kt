@@ -2,9 +2,13 @@ package com.zxy.zxydialog
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface.OnShowListener
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import com.zxy.zxydialog.tools.AnimatorEnum
 import kotlinx.android.synthetic.main.zxy_alert_dialog.view.*
 
@@ -38,6 +42,7 @@ class AlertDialogUtils private constructor() {
         var animator: Int? = null
         var title: String? = null
         var content: String? = null
+        var editTextId: Int? = null
 
         /**
          * 设置布局
@@ -47,6 +52,16 @@ class AlertDialogUtils private constructor() {
             alertDialogUtils.layoutView = LayoutInflater.from(mContext).inflate(layoutId, null)
             return this
         }
+
+        /**
+         * 是否弹出键盘
+         * @param editTextId 光标位置
+         */
+        fun isShowKeyboard(editTextId: Int): Builder {
+            this.editTextId = editTextId
+            return this
+        }
+
 
         /**
          * 设置点击事件
@@ -111,6 +126,12 @@ class AlertDialogUtils private constructor() {
             window?.attributes = layoutParams
             alertDialogUtils.dialog.show()
 
+            if (editTextId != null) {
+                alertDialogUtils.layoutView?.postDelayed({
+                    showKeyboard(alertDialogUtils.layoutView?.findViewById(editTextId!!))
+                }, 100)
+            }
+
             val lp = alertDialogUtils.dialog.window!!.attributes
             lp.width = WindowManager.LayoutParams.MATCH_PARENT
             lp.height = WindowManager.LayoutParams.WRAP_CONTENT
@@ -131,6 +152,22 @@ class AlertDialogUtils private constructor() {
         fun cancel() {
             if (alertDialogUtils.dialog != null)
                 alertDialogUtils.dialog!!.cancel()
+        }
+
+        //弹出软键盘
+        private fun showKeyboard(editText: EditText?) {
+            //其中editText为dialog中的输入框的 EditText
+            if (editText != null) {
+                //设置可获得焦点
+                editText.isFocusable = true
+                editText.isFocusableInTouchMode = true
+                //请求获得焦点
+                editText.requestFocus()
+                //调用系统输入法
+                val inputManager: InputMethodManager =
+                    mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.showSoftInput(editText, 0)
+            }
         }
     }
 

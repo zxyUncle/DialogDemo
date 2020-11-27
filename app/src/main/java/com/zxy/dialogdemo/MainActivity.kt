@@ -1,20 +1,26 @@
 package com.zxy.dialogdemo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
-import com.zxy.zxydialog.snackbar.ZToast
+import androidx.appcompat.app.AppCompatActivity
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.BottomSheetDialogUtils
 import com.zxy.zxydialog.PopWindowUtils
 import com.zxy.zxydialog.TToast
+import com.zxy.zxydialog.snackbar.ZToast
 import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.Applications
 import com.zxy.zxydialog.tools.LoadingTool
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_curse.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +29,21 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
+    //弹出软键盘
+    fun showKeyboard(editText: EditText?) {
+        //其中editText为dialog中的输入框的 EditText
+        if (editText != null) {
+            //设置可获得焦点
+            editText.isFocusable = true
+            editText.isFocusableInTouchMode = true
+            //请求获得焦点
+            editText.requestFocus()
+            //调用系统输入法
+            val inputManager: InputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.showSoftInput(editText, 0)
+        }
+    }
     private fun initView() {
         btnDialog.setOnClickListener {
             AlertDialogUtils.build(this)
@@ -38,11 +59,12 @@ class MainActivity : AppCompatActivity() {
                 }
         }
         btnDialog1.setOnClickListener {
-            AlertDialogUtils.build(this)
+            val create = AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)//必选                         自定义布局的View
                 .setTransparency(0.2f)//可选                                  默认0.2f
                 .setCancelable(true) //可选                                   默认true
-                .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
+                .isShowKeyboard(R.id.tvDialgContent)
+//                .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
                 .create { view, alertDialogUtils ->
                     //必选                    点击事件的回调
@@ -58,6 +80,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
         }
+
+
 
         btnPop2.setOnClickListener {
             PopWindowUtils.build(this)
