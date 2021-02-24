@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
         btnBottom.setOnClickListener {
             BottomSheetDialogUtils.build(this)
                 .setView(R.layout.bottom_sheet_dialog)
-                .setMinHeight(0.7f)
+                .setMinHeightValue(0.7f)
                 .show()
         }
         btnTToast.setOnClickListener {

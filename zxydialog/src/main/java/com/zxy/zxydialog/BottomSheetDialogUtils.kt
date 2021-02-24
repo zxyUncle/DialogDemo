@@ -57,7 +57,7 @@ class BottomSheetDialogUtils {
         /**
          * 所占窗口百分比
          */
-        fun setMinHeight(minHeight: Float): Builder {
+        fun setMinHeightValue(minHeight: Float): Builder {
             this.minHeight = minHeight
             return this
         }
