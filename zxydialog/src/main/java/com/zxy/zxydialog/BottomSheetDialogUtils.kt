@@ -33,6 +33,7 @@ class BottomSheetDialogUtils {
     }
 
     class Builder(mContext: Activity) {
+        var stateMode: Int = BottomSheetBehavior.STATE_EXPANDED
         var mContext = mContext
         var minHeight: Float = 0.8f//最小高度百分比
         var myStyle = R.style.bottomSheetDialog
@@ -61,6 +62,10 @@ class BottomSheetDialogUtils {
             this.minHeight = minHeight
             return this
         }
+        fun setState(mode: Int = BottomSheetBehavior.STATE_EXPANDED) :Builder{
+            this.stateMode = mode
+            return this
+        }
 
 
         fun show(): BottomSheetDialogUtils {
@@ -81,12 +86,12 @@ class BottomSheetDialogUtils {
                 bottomSheetBehavior =
                     BottomSheetBehavior.from(layoutView?.parent as View)
                 bottomSheetBehavior?.peekHeight = heigit
-                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-                bottomSheetBehavior?.addBottomSheetCallback(object :BottomSheetCallback(){
+                bottomSheetBehavior?.state = stateMode
+                bottomSheetBehavior?.addBottomSheetCallback(object : BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                             bottomSheetDialog?.dismiss()
-                            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
                         }
                     }
 
@@ -107,6 +112,7 @@ class BottomSheetDialogUtils {
             return bottomSheetDialogUtils
         }
 
+
     }
 
 
@@ -114,6 +120,7 @@ class BottomSheetDialogUtils {
         bottomSheetDialog?.setCancelable(false);
         bottomSheetDialog?.setCanceledOnTouchOutside(false);
     }
+
 
     /**
      * 弹窗高度，

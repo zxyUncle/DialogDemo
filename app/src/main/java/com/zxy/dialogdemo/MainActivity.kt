@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.BottomSheetDialogUtils
 import com.zxy.zxydialog.PopWindowUtils
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             inputManager.showSoftInput(editText, 0)
         }
     }
+
     private fun initView() {
         btnDialog.setOnClickListener {
             AlertDialogUtils.build(this)
