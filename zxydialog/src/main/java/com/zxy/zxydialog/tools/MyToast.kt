@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.zxy.zxydialog.R
 import com.zxy.zxydialog.tools.Applications
+import java.lang.Exception
 
 /**
  * Created by zxy on 2020/9/2 11:17
@@ -19,16 +20,22 @@ class MyToast {
     private var taktMsg = ""
     private var taktTime = 500
     private var oldTime = 0
-    private var toast: Toast
-    private var tvContent: TextView
+    private lateinit var toast: Toast
+    private lateinit var tvContent: TextView
+    private lateinit var  initView:View
 
     //zxy 单例模式
     @SuppressLint("WrongConstant")
     private constructor() {
-        var view = LayoutInflater.from(Applications.context()).inflate(R.layout.zxy_toast, null)
-        tvContent = view.findViewById(R.id.tvToastContent)
+        initView()
+    }
+
+    @SuppressLint("WrongConstant")
+    private fun initView(){
+        initView = LayoutInflater.from(Applications.context()).inflate(R.layout.zxy_toast, null)
+        tvContent = initView.findViewById(R.id.tvToastContent)
         toast = Toast(Applications.context())
-        toast.view = view
+        toast.view = initView
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.duration = taktTime
     }
@@ -43,15 +50,9 @@ class MyToast {
 
     @SuppressLint("WrongConstant")
     fun show(message: String) {
-        tvContent.text = message
-        if (System.currentTimeMillis() - oldTime > taktTime) {//500秒外
+            toast.view = initView
+            tvContent.text = message
             toast.show()
-        } else {//500秒内
-            if (message != taktMsg) {//内容不相同
-                cancel()
-                toast.show()
-            }
-        }
     }
 
     @SuppressLint("WrongConstant")
@@ -66,26 +67,15 @@ class MyToast {
     fun show(layoutView: View, time: Int) {
         toast.view = layoutView
         toast.duration = time
-        if (System.currentTimeMillis() - oldTime > taktTime) {//500秒外
-            toast.show()
-        } else {//500秒内
-            cancel()
-            toast.show()
-        }
+        toast.show()
     }
 
     @SuppressLint("WrongConstant")
     fun show(message: String, time: Int) {
+        toast.view = initView
         tvContent.text = message
         toast.duration = time
-        if (System.currentTimeMillis() - oldTime > time) {//X秒外
-            toast.show()
-        } else {//X秒内
-            if (message != taktMsg) {//内容不相同
-                cancel()
-                toast.show()
-            }
-        }
+        toast.show()
     }
 
     private fun cancel() {

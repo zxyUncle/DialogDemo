@@ -13,6 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TToast" />
+    <Button
+        android:id="@+id/btnToast1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TToast1" />
 
     <Button
         android:id="@+id/btnCoustToast"

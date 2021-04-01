@@ -21,6 +21,10 @@ class ToastActivity : AppCompatActivity() {
             TToast.show("请输入正确的手机号")
         }
 
+        btnToast1.setOnClickListener {
+            TToast.show("你好我好")
+        }
+
         btnCoustToast.setOnClickListener {
             var layoutView =
                 LayoutInflater.from(Applications.context()).inflate(R.layout.toast_course, null)
