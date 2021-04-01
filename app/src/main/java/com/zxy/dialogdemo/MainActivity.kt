@@ -2,16 +2,12 @@ package com.zxy.dialogdemo
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.BottomSheetDialogUtils
 import com.zxy.zxydialog.PopWindowUtils
 import com.zxy.zxydialog.TToast
@@ -20,7 +16,6 @@ import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.Applications
 import com.zxy.zxydialog.tools.LoadingTool
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.dialog_curse.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,117 +25,27 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
-    //弹出软键盘
-    fun showKeyboard(editText: EditText?) {
-        //其中editText为dialog中的输入框的 EditText
-        if (editText != null) {
-            //设置可获得焦点
-            editText.isFocusable = true
-            editText.isFocusableInTouchMode = true
-            //请求获得焦点
-            editText.requestFocus()
-            //调用系统输入法
-            val inputManager: InputMethodManager =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputManager.showSoftInput(editText, 0)
-        }
-    }
-
     private fun initView() {
-        btnDialog.setOnClickListener {
-            AlertDialogUtils.build(this)
-                .setValues("Title", "Content")
-                .create { view, alertDialogUtils ->
-                    when (view.id) {
-                        com.zxy.zxydialog.R.id.tvDialogConfig -> {
-                        }
-                        com.zxy.zxydialog.R.id.tvDialogCancel -> {
-                        }
-                    }
-                    alertDialogUtils.dismiss()
-                }
+        //跳转到Dialog
+        btnAlertDialog.setOnClickListener {
+            startNewActivity<DialogActivity>()
         }
-        btnDialog1.setOnClickListener {
-            val create = AlertDialogUtils.build(this)
-                .setView(R.layout.dialog_curse)//必选                         自定义布局的View
-                .setTransparency(0.2f)//可选                                  默认0.2f
-                .setCancelable(true) //可选                                   默认true
-                .isShowKeyboard(R.id.tvDialgContent)
-//                .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
-                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
-                .create { view, alertDialogUtils ->
-                    //必选                    点击事件的回调
-                    when (view.id) {
-                        R.id.tvDialogConfig -> {
-                            alertDialogUtils.dismiss()
-                            Toast.makeText(this, "tvDialogConfig", Toast.LENGTH_LONG).show()
-                        }
-                        R.id.tvDialogCancel -> {
-                            alertDialogUtils.dismiss()
-                            Toast.makeText(this, "tvDialogCancel", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                }
+
+        //跳转到PopWindow
+        btnPopWindow.setOnClickListener {
+            startNewActivity<PopWindowActivity>()
+        }
+        //跳转到Toast
+        btnToast.setOnClickListener {
+            startNewActivity<ToastActivity>()
+        }
+
+        //跳转到Toast
+        btnBottomSheetDialog.setOnClickListener {
+            startNewActivity<BottomSheetDialogActivity>()
         }
 
 
 
-        btnPop2.setOnClickListener {
-            PopWindowUtils.build(this)
-                .setView(R.layout.pop_curse) //必选                              设置布局
-                .setGravity(Gravity.TOP, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
-                .setTransparency(1f)//可选：                                      默认0.5    0为全黑  1全透明
-                .setPopWidthHeight(PopWindowUtils.MATCH, PopWindowUtils.WRAP)//可选 默认w=Math，h=wrap
-                .isFocusable(false)//可选：                            默认true
-                .isTouchable(true)//可选：                             默认true
-                .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
-                .setTimer(3000)//可选                                             默认不倒计时自动销毁
-//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
-                .showAtLocation({ view, popWindowUtils ->
-                    //点击事件的回调：       popWindowUtils：通过他可以拿到任何东西
-
-                }, {
-
-
-                })
-        }
-        btnPop3.setOnClickListener {
-            TToast.show("请输入正确的手机号")
-        }
-        btnPop4.setOnClickListener {
-            ZToast.setColorI("#000000")
-            ZToast.showI(this, "网路错误")
-        }
-        btnPop5.setOnClickListener {
-            LoadingTool.instance().showMultistage(this)
-            LoadingTool.instance().hideMultistage()
-        }
-
-        btnPopWindows.setOnClickListener {
-            var mPop = PopWindowUtils.build(this)
-                .setView(R.layout.pop_select) //设置布局 -必选
-                .setGravity(Gravity.BOTTOM, 0, 0)//设置方向 -可选：设置方向及宽高偏移值,默认TOP
-                .setTransparency(1f)//设置窗口透明度  -可选：默认0.5    0为全黑  1全透明
-                .setAnimator(AnimatorEnum.FOLD_T.VALUE)//可选:默认AnimatorEnum.FOLD_B.VALUE
-                //外部点击事件的监听
-//                .setOnClick(R.id.tvDialgTitle)//点击控件的ID -可选：默认没有点击事件
-                .showAsDropDown(btnPopWindows, { view: View, popWindowUtils: PopWindowUtils ->
-
-                }, {
-
-                })
-        }
-
-        btnBottom.setOnClickListener {
-            BottomSheetDialogUtils.build(this)
-                .setView(R.layout.bottom_sheet_dialog)
-                .setMinHeightValue(0.7f)
-                .show()
-        }
-        btnTToast.setOnClickListener {
-            var layoutView =
-                LayoutInflater.from(Applications.context()).inflate(R.layout.toast_course, null)
-            TToast.show(layoutView)
-        }
     }
 }

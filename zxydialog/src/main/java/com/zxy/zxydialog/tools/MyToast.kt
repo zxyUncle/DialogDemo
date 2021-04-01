@@ -34,18 +34,9 @@ class MyToast {
     }
 
     companion object {
-        @Volatile
-        private var instance: MyToast? = null
-
-        fun instance(): MyToast {
-            if (instance == null) {
-                synchronized(MyToast::class.java) {
-                    if (instance == null) {
-                        instance = MyToast()
-                    }
-                }
-            }
-            return instance!!
+        @JvmStatic
+        val INSTANCE: MyToast by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            MyToast()
         }
     }
 

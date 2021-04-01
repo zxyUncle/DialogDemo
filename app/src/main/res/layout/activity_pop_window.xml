@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PopWindowActivity">
+
+    <Button
+        android:id="@+id/btnTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAtLocation Top" />
+    <Button
+        android:id="@+id/btnBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAtLocation Bottom" />
+    <Button
+        android:id="@+id/btnLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAtLocation Left" />
+    <Button
+        android:id="@+id/btnRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAtLocation Right" />
+
+
+    <TextView
+        android:text="--------------------------------------------------------"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnPopViewTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAsDropDown Top" />
+    <Button
+        android:id="@+id/btnPopViewBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAsDropDown Bottom" />
+
+    <Button
+        android:id="@+id/btnPopViewLeft"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:layout_gravity="right"
+        android:text="showAsDropDown Left" />
+    <Button
+        android:id="@+id/btnPopViewRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAsDropDown Right" />
+
+
+
+</LinearLayout>

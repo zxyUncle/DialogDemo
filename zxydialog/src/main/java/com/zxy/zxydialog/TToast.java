@@ -7,26 +7,26 @@ import com.zxy.zxydialog.tools.MyToast;
 
 public class TToast {
     public static void show(String message) {
-        MyToast.Companion.instance().show(message);
+        MyToast.getINSTANCE().show(message);
     }
 
     public static void show(int message) {
-        MyToast.Companion.instance().show(Applications.context().getResources().getString(message));
+        MyToast.getINSTANCE().show(Applications.context().getResources().getString(message));
     }
 
     public static void show(String message, int time) {
-        MyToast.Companion.instance().show(message, time);
+        MyToast.getINSTANCE().show(message, time);
     }
 
     public static void show(int message, int time) {
-        MyToast.Companion.instance().show(Applications.context().getResources().getString(message), time);
+        MyToast.getINSTANCE().show(Applications.context().getResources().getString(message), time);
     }
 
     public static void show(View layoutView) {
-        MyToast.Companion.instance().show(layoutView);
+        MyToast.getINSTANCE().show(layoutView);
     }
 
     public static void show(View layoutView, int time) {
-        MyToast.Companion.instance().show(layoutView, time);
+        MyToast.getINSTANCE().show(layoutView, time);
     }
 }

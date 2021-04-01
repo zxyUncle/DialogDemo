@@ -9,8 +9,8 @@ import android.widget.PopupWindow
 import com.zxy.zxydialog.tools.AnimatorEnum
 import android.graphics.drawable.BitmapDrawable
 import android.R.attr.name
-
-
+import android.widget.LinearLayout
+import com.zxy.zxydialog.tools.ScreenUtil
 
 
 /**
@@ -45,7 +45,7 @@ class PopWindowUtils {
         var offsetHeight: Int = 0
         var transparency: Float = 0.8f
         var millisInFuture: Long? = null
-        var popWidth = MATCH
+        var popWidth = WRAP
         var popHeight = WRAP
 
         private val mTimer by lazy {
@@ -66,7 +66,15 @@ class PopWindowUtils {
          * @param layoutView View
          */
         fun setView(layoutId: Int): Builder {
-            popupWindowUtils.layoutView = LayoutInflater.from(mContext).inflate(layoutId, null)
+            popupWindowUtils.layoutView =  LayoutInflater.from(mContext).inflate(layoutId, null)
+            return this
+        }
+        /**
+         * 设置布局
+         * @param layoutView View
+         */
+        fun setView(layoutView: View): Builder {
+            popupWindowUtils.layoutView =layoutView
             return this
         }
 
@@ -85,11 +93,6 @@ class PopWindowUtils {
             return this
         }
 
-        fun setPopWidthHeight(popWidth: Int, popHeight: Int): Builder {
-            this.popWidth = popWidth
-            this.popHeight = popHeight
-            return this
-        }
 
         /**
          * 设置动画
@@ -110,7 +113,7 @@ class PopWindowUtils {
         }
 
         /**
-         * 设置方向及宽高偏移值
+         * 设置方向及宽高偏移值 dp
          */
         fun setGravity(
             gravity: Int,
@@ -118,8 +121,8 @@ class PopWindowUtils {
             offsetHeight: Int = 0
         ): Builder {
             this.gravity = gravity
-            this.offsetWidth = offsetWidth
-            this.offsetHeight = offsetHeight
+            this.offsetWidth = ScreenUtil.dp2px(mContext,offsetWidth)
+            this.offsetHeight = ScreenUtil.dp2px(mContext,offsetHeight)
             return this
         }
 
@@ -137,12 +140,14 @@ class PopWindowUtils {
             return this
         }
 
-
+        /**
+         * 相对于View的位置
+         */
         @SuppressLint("ClickableViewAccessibility")
         fun showAsDropDown(
             viewLocation: View,
             block: (View, PopWindowUtils) -> Unit,
-            onDismiss: (PopWindowUtils) -> Unit
+            onDismiss: ((PopWindowUtils) -> Unit)={}
         ): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
                 Log.e("", mContext.resources.getString(R.string.zxy_no_view))
@@ -151,6 +156,7 @@ class PopWindowUtils {
                     popupWindowUtils.dismiss()
                 }
                 popupWindowUtils.mContext = mContext
+                //设置布局的宽高
                 popupWindowUtils.popupWindow = PopupWindow(
                     popupWindowUtils.layoutView,
                     popWidth,
@@ -159,14 +165,20 @@ class PopWindowUtils {
                 popupWindowUtils.popupWindow!!.isTouchable = isTouchable
                 popupWindowUtils.popupWindow!!.isFocusable = isFocusable
                 popupWindowUtils.popupWindow!!.isOutsideTouchable = isOutsideTouchable
+
+
                 //4.0/5.外部点击关闭处理
-                if(isOutsideTouchable)  popupWindowUtils.popupWindow!!.setBackgroundDrawable(BitmapDrawable())
+                if (isOutsideTouchable) popupWindowUtils.popupWindow!!.setBackgroundDrawable(
+                    BitmapDrawable()
+                )
 
                 popupWindowUtils.popupWindow!!.animationStyle =
                     animator ?: AnimatorEnum.TRAN_B.VALUE
                 var height = 0
                 var width = 0
                 popupWindowUtils.layoutView?.measure(0, 0)
+
+                Log.e("zxy", "${popupWindowUtils.layoutView!!.measuredWidth}")
                 when (gravity) {
                     Gravity.TOP -> {
                         height =
@@ -212,8 +224,10 @@ class PopWindowUtils {
         }
 
         @SuppressLint("ClickableViewAccessibility")
-        fun showAtLocation(block: (View, PopWindowUtils) -> Unit,
-                           onDismiss: (PopWindowUtils) -> Unit): PopWindowUtils {
+        fun showAtLocation(
+            block: (View, PopWindowUtils) -> Unit,
+            onDismiss: ((PopWindowUtils) -> Unit)={}
+        ): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
                 Log.e("", mContext.resources.getString(R.string.zxy_no_view))
             } else {
@@ -222,6 +236,7 @@ class PopWindowUtils {
 
                 }
                 popupWindowUtils.mContext = mContext
+                //设置布局的宽高
                 popupWindowUtils.popupWindow = PopupWindow(
                     popupWindowUtils.layoutView,
                     popWidth,
@@ -234,13 +249,12 @@ class PopWindowUtils {
 
                 popupWindowUtils.popupWindow!!.isOutsideTouchable = isOutsideTouchable
 
-                var height = 0
-                var width = 0
                 popupWindowUtils.popupWindow!!.showAtLocation(
                     mContext.window.decorView,
-                    width,
-                    height,
-                    gravity ?: Gravity.TOP
+                    gravity ?: Gravity.TOP,
+                    offsetWidth,
+                    offsetHeight
+
                 )
                 if (millisInFuture != null)
                     mTimer.start()

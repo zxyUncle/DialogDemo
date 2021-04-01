@@ -54,6 +54,15 @@ class AlertDialogUtils private constructor() {
         }
 
         /**
+         * 设置布局
+         * @param layoutView View
+         */
+        fun setView(layoutView: View): Builder {
+            alertDialogUtils.layoutView = layoutView
+            return this
+        }
+
+        /**
          * 是否弹出键盘
          * @param editTextId 光标位置
          */
