@@ -9,6 +9,7 @@ import android.widget.PopupWindow
 import com.zxy.zxydialog.tools.AnimatorEnum
 import android.graphics.drawable.BitmapDrawable
 import android.R.attr.name
+import android.nfc.Tag
 import android.widget.LinearLayout
 import com.zxy.zxydialog.tools.ScreenUtil
 
@@ -66,15 +67,16 @@ class PopWindowUtils {
          * @param layoutView View
          */
         fun setView(layoutId: Int): Builder {
-            popupWindowUtils.layoutView =  LayoutInflater.from(mContext).inflate(layoutId, null)
+            popupWindowUtils.layoutView = LayoutInflater.from(mContext).inflate(layoutId, null)
             return this
         }
+
         /**
          * 设置布局
          * @param layoutView View
          */
         fun setView(layoutView: View): Builder {
-            popupWindowUtils.layoutView =layoutView
+            popupWindowUtils.layoutView = layoutView
             return this
         }
 
@@ -121,8 +123,8 @@ class PopWindowUtils {
             offsetHeight: Int = 0
         ): Builder {
             this.gravity = gravity
-            this.offsetWidth = ScreenUtil.dp2px(mContext,offsetWidth)
-            this.offsetHeight = ScreenUtil.dp2px(mContext,offsetHeight)
+            this.offsetWidth = ScreenUtil.dp2px(mContext, offsetWidth)
+            this.offsetHeight = ScreenUtil.dp2px(mContext, offsetHeight)
             return this
         }
 
@@ -147,7 +149,7 @@ class PopWindowUtils {
         fun showAsDropDown(
             viewLocation: View,
             block: (View, PopWindowUtils) -> Unit,
-            onDismiss: ((PopWindowUtils) -> Unit)={}
+            onDismiss: ((PopWindowUtils) -> Unit) = {}
         ): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
                 Log.e("", mContext.resources.getString(R.string.zxy_no_view))
@@ -203,10 +205,14 @@ class PopWindowUtils {
                     mTimer.start()
                 if (popupWindowUtils.listView != null) {
                     for (index in 0 until popupWindowUtils.listView!!.size step 1) {
-                        popupWindowUtils.layoutView!!.findViewById<View>(popupWindowUtils.listView!![index])
-                            .setOnClickListener {
-                                block(it, popupWindowUtils)
-                            }
+                        try {
+                            popupWindowUtils.layoutView!!.findViewById<View>(popupWindowUtils.listView!![index])
+                                .setOnClickListener {
+                                    block(it, popupWindowUtils)
+                                }
+                        } catch (e: Exception) {
+                            Log.e("", "不存在的布局Id")
+                        }
                     }
                 }
                 //设置遮罩层
@@ -226,7 +232,7 @@ class PopWindowUtils {
         @SuppressLint("ClickableViewAccessibility")
         fun showAtLocation(
             block: (View, PopWindowUtils) -> Unit,
-            onDismiss: ((PopWindowUtils) -> Unit)={}
+            onDismiss: ((PopWindowUtils) -> Unit) = {}
         ): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
                 Log.e("", mContext.resources.getString(R.string.zxy_no_view))
@@ -260,10 +266,15 @@ class PopWindowUtils {
                     mTimer.start()
                 if (popupWindowUtils.listView != null) {
                     for (index in 0 until popupWindowUtils.listView!!.size step 1) {
-                        popupWindowUtils.layoutView!!.findViewById<View>(popupWindowUtils.listView!![index])
-                            .setOnClickListener {
-                                block(it, popupWindowUtils)
-                            }
+                        try {
+                            popupWindowUtils.layoutView!!.findViewById<View>(popupWindowUtils.listView!![index])
+                                .setOnClickListener {
+                                    block(it, popupWindowUtils)
+                                }
+                        } catch (e: Exception) {
+                            Log.e("", "不存在的布局Id")
+                        }
+
                     }
                 }
                 //设置遮罩层
