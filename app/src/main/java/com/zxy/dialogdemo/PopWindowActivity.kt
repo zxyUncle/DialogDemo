@@ -30,7 +30,7 @@ class PopWindowActivity : AppCompatActivity() {
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选                                             默认不倒计时自动销毁
-                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
+//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
                 .showAtLocation({ view, pop ->
 
                 }, {
@@ -102,7 +102,7 @@ class PopWindowActivity : AppCompatActivity() {
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_T.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选                                             默认不倒计时自动销毁
-                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
+//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
                 .showAsDropDown(it, { view, pop ->
                     {
 
