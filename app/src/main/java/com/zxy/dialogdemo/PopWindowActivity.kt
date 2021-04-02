@@ -24,13 +24,13 @@ class PopWindowActivity : AppCompatActivity() {
         btnTop.setOnClickListener {
             var popWindowUtils = PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选                              设置布局
-                .setGravity(Gravity.TOP, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
+                .setGravity(Gravity.TOP, 0, 0)//可选     设置方向及宽高偏移值,默认TOP
                 .setTransparency(1f)//可选：                                      默认0.5    0为全黑  1全透明
                 .isFocusable(false)//可选：                            默认true
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_T_NO_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选                                             默认不倒计时自动销毁
-//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
+                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
                 .showAtLocation({ view, pop ->
 
                 }, {
@@ -42,8 +42,8 @@ class PopWindowActivity : AppCompatActivity() {
         btnBottom.setOnClickListener {
             var popWindowUtils = PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选                              设置布局
-                .setGravity(Gravity.BOTTOM, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
-                .setTransparency(0.8f)//可选：                                      默认0.5    0为全黑  1全透明
+                .setGravity(Gravity.BOTTOM, 0, 0)//可选  设置方向及宽高偏移值,默认TOP
+                .setTransparency(0.8f)//可选：                                     默认0.5    0为全黑  1全透明
                 .isFocusable(false)//可选：                            默认true
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_B.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
@@ -59,8 +59,8 @@ class PopWindowActivity : AppCompatActivity() {
         btnLeft.setOnClickListener {
             var popWindowUtils = PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选                              设置布局
-                .setGravity(Gravity.LEFT, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
-                .setTransparency(0.8f)//可选：                                      默认0.5    0为全黑  1全透明
+                .setGravity(Gravity.LEFT, 0, 0)//可选    设置方向及宽高偏移值,默认TOP
+                .setTransparency(0.8f)//可选：                                     默认0.5    0为全黑  1全透明
                 .isFocusable(false)//可选：                            默认true
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_L.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
@@ -102,12 +102,12 @@ class PopWindowActivity : AppCompatActivity() {
                 .isTouchable(true)//可选：                             默认true
                 .setAnimator(AnimatorEnum.FOLD_T.VALUE)//可选:               默认AnimatorEnum.FOLD_B.VALUE
                 .setTimer(3000)//可选                                             默认不倒计时自动销毁
-//                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
+                .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel)//可选：    默认没有点击事件
                 .showAsDropDown(it, { view, pop ->
                     {
 
                     }
-                }, {
+                }, { //点击外部销毁Pop的监听
 
                 })
         }
