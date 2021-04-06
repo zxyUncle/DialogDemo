@@ -31,6 +31,7 @@ class AlertDialogUtils private constructor() {
 
 
     companion object {
+        @JvmStatic
         fun build(mContext: Context): Builder {
             return Builder(mContext)
         }
