@@ -3,6 +3,7 @@ package com.zxy.zxydialog
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -68,8 +69,10 @@ class BottomSheetDialogUtils {
             return this
         }
 
-
-        fun show(): BottomSheetDialogUtils {
+        /**
+         * @param close 被关闭的回调
+         */
+        fun show(closeBack:(()->Unit)={}): BottomSheetDialogUtils {
             bottomSheetDialogUtils.run {
                 if (layoutView == null)
                     setView(R.layout.zxy_bottom_sheet_dialog)
@@ -91,8 +94,7 @@ class BottomSheetDialogUtils {
                 bottomSheetBehavior?.addBottomSheetCallback(object : BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                            bottomSheetDialog?.dismiss()
-                            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+                            closeDialog()
                         }
                     }
 
@@ -102,6 +104,10 @@ class BottomSheetDialogUtils {
                     }
 
                 })
+
+                bottomSheetDialog?.setOnDismissListener {
+                    closeBack()
+                }
 
                 //设置透明背景
                 bottomSheetDialog?.window?.findViewById<View>(R.id.design_bottom_sheet)
@@ -122,12 +128,16 @@ class BottomSheetDialogUtils {
     }
 
 
-    fun setCancelable() {
-        bottomSheetDialog?.setCancelable(false)
-        bottomSheetDialog?.setCanceledOnTouchOutside(false);
+    fun setCancelable(isCancel:Boolean) {
+        bottomSheetDialog?.setCancelable(isCancel)
+        bottomSheetDialog?.setCanceledOnTouchOutside(isCancel)
     }
+
+    /**
+     * 关闭、销毁
+     */
     fun closeDialog(){
-        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetDialog?.dismiss()
     }
 
     /**
