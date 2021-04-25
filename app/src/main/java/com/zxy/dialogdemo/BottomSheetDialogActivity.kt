@@ -19,5 +19,12 @@ class BottomSheetDialogActivity : AppCompatActivity() {
                 .setMinHeightValue(0.7f)
                 .show()
         }
+
+        btnBottomSheetDialog1.setOnClickListener {
+            val show = BottomSheetDialogUtils.build(this)
+                .setView(R.layout.popwindow_qrcode)
+                .setMinHeightValue(0.7f)
+                .show()
+        }
     }
 }

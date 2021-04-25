@@ -2,12 +2,11 @@ package com.zxy.zxydialog
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -22,11 +21,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class BottomSheetDialogUtils {
     var bottomSheetDialog: BottomSheetDialog? = null
     var layoutView: View? = null
+    var bottomSheetBehavior: BottomSheetBehavior<View>? = null
 
     //zxy 单例模式
     private constructor() {}
 
     companion object {
+        @JvmStatic
         fun build(mContext: Activity): Builder {
             return Builder(mContext)
         }
@@ -38,7 +39,6 @@ class BottomSheetDialogUtils {
         var minHeight: Float = 0.8f//最小高度百分比
         var myStyle = R.style.bottomSheetDialog
         var bottomSheetDialogUtils = BottomSheetDialogUtils()
-        var bottomSheetBehavior: BottomSheetBehavior<View>? = null
 
         /**
          * 设置布局
@@ -62,7 +62,8 @@ class BottomSheetDialogUtils {
             this.minHeight = minHeight
             return this
         }
-        fun setState(mode: Int = BottomSheetBehavior.STATE_EXPANDED) :Builder{
+
+        fun setState(mode: Int = BottomSheetBehavior.STATE_EXPANDED): Builder {
             this.stateMode = mode
             return this
         }
@@ -104,9 +105,14 @@ class BottomSheetDialogUtils {
 
                 //设置透明背景
                 bottomSheetDialog?.window?.findViewById<View>(R.id.design_bottom_sheet)
-                    ?.setBackgroundResource(android.R.color.white)
-                mContext.window.setWindowAnimations(myStyle)//设置动画效果
+                    ?.setBackgroundResource(android.R.color.transparent)
 
+
+                val bottomSheet =
+                    bottomSheetDialog?.delegate?.findViewById<FrameLayout>(R.id.design_bottom_sheet)
+                bottomSheet?.setBackgroundColor(Color.parseColor("#00000000"))
+
+//                mContext.window.setWindowAnimations(myStyle)//设置动画效果
                 bottomSheetDialog?.show()
             }
             return bottomSheetDialogUtils
@@ -117,10 +123,12 @@ class BottomSheetDialogUtils {
 
 
     fun setCancelable() {
-        bottomSheetDialog?.setCancelable(false);
+        bottomSheetDialog?.setCancelable(false)
         bottomSheetDialog?.setCanceledOnTouchOutside(false);
     }
-
+    fun closeDialog(){
+        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+    }
 
     /**
      * 弹窗高度，

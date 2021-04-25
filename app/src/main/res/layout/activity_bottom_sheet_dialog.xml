@@ -13,4 +13,9 @@
         android:layout_width="match_parent"
         android:text="弹出BottomSheetDialog"
         android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnBottomSheetDialog1"
+        android:layout_width="match_parent"
+        android:text="弹出BottomSheetDialog圆角"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

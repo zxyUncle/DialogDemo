@@ -15,6 +15,7 @@
         <item name="android:backgroundDimAmount">0.1</item>
     </style>
 
+
     <!--自定义万能布局Dialog 背景透明-->
     <style name="zxy_MyDilog" parent="Theme.AppCompat.Dialog">
         <!--设置window的窗口背景为透明-->
