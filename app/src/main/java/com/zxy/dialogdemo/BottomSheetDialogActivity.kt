@@ -21,7 +21,7 @@ class BottomSheetDialogActivity : AppCompatActivity() {
             BottomSheetDialogUtils.build(this)
                 .setView(R.layout.bottom_sheet_dialog)
                 .setMinHeightValue(0.7f)
-                .show({})
+                .show()
         }
 
         btnBottomSheetDialog1.setOnClickListener {

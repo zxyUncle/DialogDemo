@@ -72,6 +72,7 @@ class BottomSheetDialogUtils {
         /**
          * @param close 被关闭的回调
          */
+        @JvmOverloads
         fun show(closeBack:(()->Unit)={}): BottomSheetDialogUtils {
             bottomSheetDialogUtils.run {
                 if (layoutView == null)
