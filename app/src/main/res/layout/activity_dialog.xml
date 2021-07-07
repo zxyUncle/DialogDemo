@@ -20,4 +20,15 @@
         android:layout_height="wrap_content"
         android:text="自定义布局" />
 
+    <Button
+        android:id="@+id/btnDialog2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SrcollView" />
+    <Button
+        android:id="@+id/btnDialog3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text" />
+
 </LinearLayout>

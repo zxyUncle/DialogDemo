@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--下架弹出框-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_round_10_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvDialogContext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|top"
+            android:minHeight="100dp"
+            android:padding="18dp"
+            android:text="昂及发撒旦法打飞机亏了多少建安费打发集散地发四大放假的啥咖啡机第三范德萨附近第三方按实际付款了三大发煞风景萨克立方撒附近撒旦教发沙发受打击发送发觉三大件费撒发发阿萨德解放啦授课简单发按时发的阿斯蒂芬金坷垃是多发点冷风机阿萨德风口浪尖爱上了打飞机撒旦法阿斯蒂芬"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f1f1f1" />
+
+        <TextView
+            android:id="@+id/tvDialogConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#6785C1"
+            android:textSize="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tvDialogConfig"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+</LinearLayout>

@@ -15,6 +15,10 @@
         <item name="android:backgroundDimAmount">0.1</item>
     </style>
 
+    <declare-styleable name="MaxHeightScrollView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
 
     <!--自定义万能布局Dialog 背景透明-->
     <style name="zxy_MyDilog" parent="Theme.AppCompat.Dialog">

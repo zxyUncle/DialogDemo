@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!--下架弹出框-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:orientation="vertical"
+    android:padding="15dp"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_round_10_white"
+        android:orientation="vertical"
+        >
+
+        <com.zxy.zxydialog.MaxHeightScrollView
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:maxHeight="500dp"
+            >
+            <TextView
+                android:id="@+id/tvDialogContext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|top"
+                android:minHeight="100dp"
+                android:padding="18dp"
+                android:text="\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                />
+
+        </com.zxy.zxydialog.MaxHeightScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f1f1f1"
+            />
+
+        <TextView
+            android:id="@+id/tvDialogConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#6785C1"
+            android:textSize="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tvDialogConfig"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop"
+            />
+    </LinearLayout>
+</LinearLayout>

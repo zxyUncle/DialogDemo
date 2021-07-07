@@ -25,7 +25,7 @@ class BottomSheetDialogActivity : AppCompatActivity() {
         }
 
         btnBottomSheetDialog1.setOnClickListener {
-            val show = BottomSheetDialogUtils.build(this)
+            BottomSheetDialogUtils.build(this)
                 .setView(R.layout.popwindow_qrcode)
                 .setMinHeightValue(0.7f)
                 .show {
