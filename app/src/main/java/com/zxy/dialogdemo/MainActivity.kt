@@ -15,6 +15,7 @@ import com.zxy.zxydialog.snackbar.ZToast
 import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.Applications
 import com.zxy.zxydialog.tools.LoadingTool
+import com.zxy.zxydialog.zxing.ZXingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -44,7 +45,10 @@ class MainActivity : AppCompatActivity() {
         btnBottomSheetDialog.setOnClickListener {
             startNewActivity<BottomSheetDialogActivity>()
         }
-
+        //跳转到扫码
+        btcnScan.setOnClickListener {
+            startNewActivity<QRcodeActivity>()
+        }
 
 
     }

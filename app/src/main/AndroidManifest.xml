@@ -12,6 +12,7 @@
         <activity android:name=".BottomSheetDialogActivity"></activity>
         <activity android:name=".ToastActivity" />
         <activity android:name=".PopWindowActivity" />
+        <activity android:name=".QRcodeActivity" />
         <activity android:name=".DialogActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

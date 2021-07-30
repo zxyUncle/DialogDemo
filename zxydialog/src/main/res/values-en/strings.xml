@@ -4,4 +4,5 @@
 	<string name="zxy_dialog_config">Confirm</string>
 	<string name="zxy_no_view">Do not set the layout of setView</string>
 	<string name="zxy_loading">Loading...</string>
+	<string name="zxy_qrcode_photo">Select the QR code from the album</string>
 </resources>

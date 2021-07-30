@@ -49,10 +49,12 @@ class MyToast {
 
 
     @SuppressLint("WrongConstant")
-    fun show(message: String) {
+    fun show(message: String?) {
+        if (message!=null) {
             toast.view = initView
             tvContent.text = message
             toast.show()
+        }
     }
 
     @SuppressLint("WrongConstant")
@@ -72,10 +74,12 @@ class MyToast {
 
     @SuppressLint("WrongConstant")
     fun show(message: String, time: Int) {
-        toast.view = initView
-        tvContent.text = message
-        toast.duration = time
-        toast.show()
+        if (message!=null) {
+            toast.view = initView
+            tvContent.text = message
+            toast.duration = time
+            toast.show()
+        }
     }
 
     private fun cancel() {
