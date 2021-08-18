@@ -46,12 +46,11 @@ class AlertDialogUtils private constructor() {
         var title: String? = null
         var content: String? = null
         var editTextId: Int? = null
-        var onShowListener:OnShowListener?=null
-        var onDismissListener: DialogInterface.OnDismissListener?=null
-        var onCancelListener: DialogInterface.OnCancelListener?=null
+        var onDismissListener: DialogInterface.OnDismissListener? = null
+        var onCancelListener: DialogInterface.OnCancelListener? = null
 
-        interface OnShowListener{
-            fun onShow(alertDialogUtils:AlertDialogUtils)
+        interface OnShowListener {
+            fun onShow(alertDialogUtils: AlertDialogUtils)
         }
 
         /**
@@ -93,7 +92,6 @@ class AlertDialogUtils private constructor() {
         }
 
 
-
         /**
          * 设置点击事件
          * @param viewId IntArray
@@ -107,8 +105,8 @@ class AlertDialogUtils private constructor() {
          * 设置销毁的事件
          * @param viewId IntArray
          */
-        fun setOnDismissListener(listener: DialogInterface.OnDismissListener ): Builder {
-           onDismissListener=listener
+        fun setOnDismissListener(listener: DialogInterface.OnDismissListener): Builder {
+            onDismissListener = listener
             return this
         }
 
@@ -116,8 +114,8 @@ class AlertDialogUtils private constructor() {
          * 设置销毁的事件
          * @param viewId IntArray
          */
-        fun setOnCancelListener(listener: DialogInterface.OnCancelListener ): Builder {
-          onCancelListener = listener
+        fun setOnCancelListener(listener: DialogInterface.OnCancelListener): Builder {
+            onCancelListener = listener
             return this
         }
 
@@ -154,74 +152,73 @@ class AlertDialogUtils private constructor() {
         /**
          * Dilaog 创建完成显示
          */
-        fun show(onShowListener:OnShowListener): Builder{
-            this.onShowListener = onShowListener
+        fun show(callBack: ((AlertDialogUtils) -> Unit) = {}) {
+            if (alertDialogUtils.alertDilaogBuilder == null) {
+                OnClickListener()
+            }
+            callBack(alertDialogUtils)
+        }
+
+        /**
+         * 创建自定义布局的AlertDialog
+         */
+        fun OnClickListener(callBack: ((View, AlertDialogUtils) -> Unit) = { _: View, _: AlertDialogUtils -> }): Builder {
+            if (alertDialogUtils.alertDilaogBuilder != null) {
+                alertDialogUtils.dismiss()
+            }
+            alertDialogUtils.alertDilaogBuilder = AlertDialog.Builder(mContext, R.style.zxy_MyDilog)
+            if (alertDialogUtils.layoutView == null) {//自带的dialog
+                setView(R.layout.zxy_alert_dialog)
+                setOnClick(R.id.tvDialogCancel, R.id.tvDialogConfig)
+                alertDialogUtils.layoutView?.tvDialgTitle?.text = title
+                alertDialogUtils.layoutView?.tvDialgContent?.text = content
+            }
+            alertDialogUtils?.alertDilaogBuilder?.setView(alertDialogUtils.layoutView)
+            alertDialogUtils.dialog = alertDialogUtils?.alertDilaogBuilder?.create()!!
+            alertDialogUtils.dialog.setCancelable(alertDialogUtils.cancelable)
+            //设置动画
+            var window = alertDialogUtils.dialog.window
+            var layoutParams = window?.attributes
+            layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
+            window?.attributes = layoutParams
+            alertDialogUtils.dialog.show()
+
+            if (editTextId != null) {
+                alertDialogUtils.layoutView?.postDelayed({
+                    showKeyboard(alertDialogUtils.layoutView?.findViewById(editTextId!!))
+                }, 100)
+            }
+
+            val lp = alertDialogUtils.dialog.window!!.attributes
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            alertDialogUtils.dialog.window!!.setDimAmount(alertDialogUtils.transparency)//设置黑色遮罩层的透明度
+            alertDialogUtils.dialog.window!!.attributes = lp
+
+            if (alertDialogUtils.listView != null) {
+                for (index in alertDialogUtils.listView!!) {
+                    alertDialogUtils.layoutView!!.findViewById<View>(index)
+                        .setOnClickListener {
+                            callBack(it, alertDialogUtils)
+                        }
+                }
+            }
+
+            if (onCancelListener != null) {
+                alertDialogUtils.dialog.setOnCancelListener(onCancelListener)
+            }
+            if (onDismissListener != null) {
+                alertDialogUtils.dialog.setOnDismissListener(onDismissListener)
+            }
+
             return this
         }
 
         /**
          * 创建自定义布局的AlertDialog
          */
-        fun OnClickListener(callBack:( (View, AlertDialogUtils) -> Unit)={ _: View, _: AlertDialogUtils -> }): AlertDialogUtils {
-            if (alertDialogUtils.alertDilaogBuilder != null) {
-                alertDialogUtils.dismiss()
-            }
-            alertDialogUtils.alertDilaogBuilder = AlertDialog.Builder(mContext, R.style.zxy_MyDilog)
-            if (alertDialogUtils.layoutView == null) {//自带的dialog
-                setView(R.layout.zxy_alert_dialog)
-                setOnClick(R.id.tvDialogCancel, R.id.tvDialogConfig)
-                alertDialogUtils.layoutView?.tvDialgTitle?.text = title
-                alertDialogUtils.layoutView?.tvDialgContent?.text = content
-            }
-            alertDialogUtils?.alertDilaogBuilder?.setView(alertDialogUtils.layoutView)
-            alertDialogUtils.dialog = alertDialogUtils?.alertDilaogBuilder?.create()!!
-            alertDialogUtils.dialog.setCancelable(alertDialogUtils.cancelable)
-            //设置动画
-            var window = alertDialogUtils.dialog.window
-            var layoutParams = window?.attributes
-            layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
-            window?.attributes = layoutParams
-            alertDialogUtils.dialog.show()
-
-            if (editTextId != null) {
-                alertDialogUtils.layoutView?.postDelayed({
-                    showKeyboard(alertDialogUtils.layoutView?.findViewById(editTextId!!))
-                }, 100)
-            }
-
-            val lp = alertDialogUtils.dialog.window!!.attributes
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-            alertDialogUtils.dialog.window!!.setDimAmount(alertDialogUtils.transparency)//设置黑色遮罩层的透明度
-            alertDialogUtils.dialog.window!!.attributes = lp
-
-            if (alertDialogUtils.listView != null) {
-                for (index in alertDialogUtils.listView!!) {
-                    alertDialogUtils.layoutView!!.findViewById<View>(index)
-                        .setOnClickListener {
-                            callBack(it, alertDialogUtils)
-                        }
-                }
-            }
-
-            if (onCancelListener!=null){
-                alertDialogUtils.dialog.setOnCancelListener(onCancelListener)
-            }
-            if (onDismissListener!=null){
-                alertDialogUtils.dialog.setOnDismissListener(onDismissListener)
-            }
-
-            if (onShowListener!=null){
-                onShowListener!!.onShow(alertDialogUtils)
-            }
-            return alertDialogUtils
-        }
-
-        /**
-         * 创建自定义布局的AlertDialog
-         */
         @Deprecated("过期，使用OnClickListener")
-        fun create(callBack:( (View, AlertDialogUtils) -> Unit)={ _: View, _: AlertDialogUtils -> }): AlertDialogUtils {
+        fun create(callBack: ((View, AlertDialogUtils) -> Unit) = { _: View, _: AlertDialogUtils -> }): AlertDialogUtils {
             if (alertDialogUtils.alertDilaogBuilder != null) {
                 alertDialogUtils.dismiss()
             }
@@ -263,16 +260,13 @@ class AlertDialogUtils private constructor() {
                 }
             }
 
-            if (onCancelListener!=null){
+            if (onCancelListener != null) {
                 alertDialogUtils.dialog.setOnCancelListener(onCancelListener)
             }
-            if (onDismissListener!=null){
+            if (onDismissListener != null) {
                 alertDialogUtils.dialog.setOnDismissListener(onDismissListener)
             }
 
-            if (onShowListener!=null){
-                onShowListener!!.onShow(alertDialogUtils)
-            }
             return alertDialogUtils
         }
 

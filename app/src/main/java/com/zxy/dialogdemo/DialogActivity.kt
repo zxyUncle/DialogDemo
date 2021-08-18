@@ -34,7 +34,7 @@ class DialogActivity : AppCompatActivity() {
                         }
                     }
                     alertDialogUtils.dismiss()
-                }
+                }.show()
         }
 
         btnDialog1.setOnClickListener {
@@ -48,11 +48,6 @@ class DialogActivity : AppCompatActivity() {
                 .setOnDismissListener(DialogInterface.OnDismissListener {
                     Log.e("zxy","setOnDismissListener")
                 })
-                .show(object :AlertDialogUtils.Builder.OnShowListener{
-                    override fun onShow(alertDialogUtils: AlertDialogUtils) {
-                        Log.e("zxy","onShow")
-                    }
-                })
                 .OnClickListener { view, alertDialogUtils -> //必选                    点击事件的回调
                     when (view.id) {
                         R.id.tvDialogConfig -> {
@@ -64,6 +59,9 @@ class DialogActivity : AppCompatActivity() {
                             TToast.show("tvDialogCancel")
                         }
                     }
+                }
+                .show {
+                    Log.e("zxy","onShow")
                 }
         }
         btnDialog2.setOnClickListener {
@@ -81,7 +79,7 @@ class DialogActivity : AppCompatActivity() {
 
                         }
                     }
-                }
+                }.show()
         }
         btnDialog3.setOnClickListener {
             val alertDialogUtils = AlertDialogUtils.build(this)
@@ -98,7 +96,7 @@ class DialogActivity : AppCompatActivity() {
 
                         }
                     }
-                }
+                }.show()
         }
     }
 }
