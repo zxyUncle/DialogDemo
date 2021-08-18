@@ -47,6 +47,9 @@ class AlertDialogUtils private constructor() {
         var content: String? = null
         var editTextId: Int? = null
 
+        var onDismissListener: DialogInterface.OnDismissListener?=null
+        var onCancelListener: DialogInterface.OnCancelListener?=null
+
         /**
          * 设置布局
          * @param layoutView View
@@ -101,7 +104,7 @@ class AlertDialogUtils private constructor() {
          * @param viewId IntArray
          */
         fun setOnDismissListener(listener: DialogInterface.OnDismissListener ): Builder {
-           alertDialogUtils.dialog.setOnDismissListener(listener)
+            onDismissListener = listener
             return this
         }
 
@@ -110,7 +113,7 @@ class AlertDialogUtils private constructor() {
          * @param viewId IntArray
          */
         fun setOnCancelListener(listener: DialogInterface.OnCancelListener ): Builder {
-            alertDialogUtils.dialog.setOnCancelListener(listener)
+            onCancelListener = listener
             return this
         }
 
@@ -187,6 +190,13 @@ class AlertDialogUtils private constructor() {
                             callBack(it, alertDialogUtils)
                         }
                 }
+            }
+
+            if (onCancelListener!=null){
+                alertDialogUtils.dialog.setOnCancelListener(onCancelListener)
+            }
+            if (onDismissListener!=null){
+                alertDialogUtils.dialog.setOnDismissListener(onDismissListener)
             }
             return alertDialogUtils
         }

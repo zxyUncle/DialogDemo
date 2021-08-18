@@ -1,5 +1,6 @@
 package com.zxy.dialogdemo
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.zxy.zxydialog.AlertDialogUtils
@@ -24,6 +25,9 @@ class DialogActivity : AppCompatActivity() {
         btnDialog.setOnClickListener {
             var alertDialogUtils = AlertDialogUtils.build(this)
                 .setValues("Title", "Content")
+                .setOnDismissListener(DialogInterface.OnDismissListener {
+                    
+                })
                 .create { view, alertDialogUtils ->
                     when (view.id) {
                         R.id.tvDialogConfig -> {
