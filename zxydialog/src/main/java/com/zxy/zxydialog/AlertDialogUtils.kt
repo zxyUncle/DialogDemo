@@ -1,7 +1,9 @@
 package com.zxy.zxydialog
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.DialogInterface.OnShowListener
 import android.os.Handler
 import android.view.LayoutInflater
@@ -64,13 +66,25 @@ class AlertDialogUtils private constructor() {
         }
 
         /**
+         *
          * 是否弹出键盘
          * @param editTextId 光标位置
          */
+        @Deprecated("过期，新方法setEditFocus")
         fun isShowKeyboard(editTextId: Int): Builder {
             this.editTextId = editTextId
             return this
         }
+
+        /**
+         * 是否弹出键盘
+         * @param editTextId 光标位置
+         */
+        fun setEditFocus(editTextId: Int): Builder {
+            this.editTextId = editTextId
+            return this
+        }
+
 
 
         /**
@@ -79,6 +93,24 @@ class AlertDialogUtils private constructor() {
          */
         fun setOnClick(vararg viewId: Int): Builder {
             alertDialogUtils.listView = viewId.toTypedArray().toMutableList()
+            return this
+        }
+
+        /**
+         * 设置销毁的事件
+         * @param viewId IntArray
+         */
+        fun setOnDismissListener(listener: DialogInterface.OnDismissListener ): Builder {
+           alertDialogUtils.dialog.setOnDismissListener(listener)
+            return this
+        }
+
+        /**
+         * 设置销毁的事件
+         * @param viewId IntArray
+         */
+        fun setOnCancelListener(listener: DialogInterface.OnCancelListener ): Builder {
+            alertDialogUtils.dialog.setOnCancelListener(listener)
             return this
         }
 
@@ -115,7 +147,7 @@ class AlertDialogUtils private constructor() {
         /**
          * 创建自定义布局的AlertDialog
          */
-        fun create(block: (View, AlertDialogUtils) -> Unit): AlertDialogUtils {
+        fun create(callBack:( (View, AlertDialogUtils) -> Unit)={ _: View, _: AlertDialogUtils -> }): AlertDialogUtils {
             if (alertDialogUtils.alertDilaogBuilder != null) {
                 alertDialogUtils.dismiss()
             }
@@ -149,10 +181,10 @@ class AlertDialogUtils private constructor() {
             alertDialogUtils.dialog.window!!.attributes = lp
 
             if (alertDialogUtils.listView != null) {
-                for (index in 0 until alertDialogUtils.listView!!.size step 1) {
-                    alertDialogUtils.layoutView!!.findViewById<View>(alertDialogUtils.listView!![index])
+                for (index in alertDialogUtils.listView!!) {
+                    alertDialogUtils.layoutView!!.findViewById<View>(index)
                         .setOnClickListener {
-                            block(it, alertDialogUtils)
+                            callBack(it, alertDialogUtils)
                         }
                 }
             }
