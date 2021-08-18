@@ -25,9 +25,6 @@ class DialogActivity : AppCompatActivity() {
         btnDialog.setOnClickListener {
             var alertDialogUtils = AlertDialogUtils.build(this)
                 .setValues("Title", "Content")
-                .setOnDismissListener(DialogInterface.OnDismissListener {
-                    
-                })
                 .create { view, alertDialogUtils ->
                     when (view.id) {
                         R.id.tvDialogConfig -> {
