@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.zxy.zxydialog.tools.AnimatorEnum
+import com.zxy.zxydialog.tools.Applications
 import kotlinx.android.synthetic.main.zxy_alert_dialog.view.*
 
 
@@ -146,6 +147,12 @@ class AlertDialogUtils private constructor() {
         fun setValues(title: String, content: String): Builder {
             this.title = title
             this.content = content
+            return this
+        }
+
+        fun setValues(title: Int, content: Int): Builder {
+            this.title = Applications.context().resources.getString(title)
+            this.content = Applications.context().resources.getString(content)
             return this
         }
 
