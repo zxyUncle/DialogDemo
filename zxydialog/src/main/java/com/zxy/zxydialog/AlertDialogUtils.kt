@@ -159,6 +159,12 @@ class AlertDialogUtils private constructor() {
             callBack(alertDialogUtils)
         }
 
+        fun show(){
+            if (alertDialogUtils.alertDilaogBuilder == null) {
+                OnClickListener()
+            }
+        }
+
         /**
          * 创建自定义布局的AlertDialog
          */
