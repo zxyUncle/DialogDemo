@@ -14,6 +14,7 @@ import com.zxy.zxydialog.TToast
 import com.zxy.zxydialog.snackbar.ZToast
 import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.Applications
+import com.zxy.zxydialog.tools.DecimalTools
 import com.zxy.zxydialog.tools.LoadingTool
 import com.zxy.zxydialog.zxing.ZXingActivity
 import kotlinx.android.synthetic.main.activity_main.*
