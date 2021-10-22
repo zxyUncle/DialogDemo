@@ -109,7 +109,7 @@ class PopWindowUtils {
          * @param transparency Float
          * @return Builder
          */
-        fun setTransparency(transparency: Float): Builder {
+        fun setTransparencys(transparency: Float): Builder {
             this.transparency = transparency
             return this
         }
