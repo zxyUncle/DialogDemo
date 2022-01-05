@@ -1,11 +1,9 @@
 package com.zxy.zxydialog
 
+import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.DialogInterface.OnShowListener
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -35,17 +33,18 @@ class AlertDialogUtils private constructor() {
 
     companion object {
         @JvmStatic
-        fun build(mContext: Context): Builder {
+        fun build(mContext: Activity): Builder {
             return Builder(mContext)
         }
     }
 
-    class Builder(mContext: Context) {
+    class Builder(mContext: Activity) {
         var mContext = mContext
         var alertDialogUtils = AlertDialogUtils()
         var animator: Int? = null
         var title: String? = null
         var content: String? = null
+        var fullScreen:Boolean = false
         var editTextId: Int? = null
         var onDismissListener: DialogInterface.OnDismissListener? = null
         var onCancelListener: DialogInterface.OnCancelListener? = null
@@ -70,6 +69,10 @@ class AlertDialogUtils private constructor() {
         fun setView(layoutView: View): Builder {
             alertDialogUtils.layoutView = layoutView
             return this
+        }
+
+        fun isfullScreen(fullScreen: Boolean){
+            this.fullScreen=fullScreen
         }
 
         /**
@@ -172,10 +175,22 @@ class AlertDialogUtils private constructor() {
             }
         }
 
+        private fun bottomNavInVisible() {
+            mContext.window.decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE
+            )
+        }
         /**
          * 创建自定义布局的AlertDialog
          */
         fun OnClickListener(callBack: ((View, AlertDialogUtils) -> Unit) = { _: View, _: AlertDialogUtils -> }): Builder {
+            if (fullScreen)
+                bottomNavInVisible()
             if (alertDialogUtils.alertDilaogBuilder != null) {
                 alertDialogUtils.dismiss()
             }

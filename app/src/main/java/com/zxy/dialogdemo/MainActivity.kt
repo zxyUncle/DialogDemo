@@ -1,22 +1,10 @@
 package com.zxy.dialogdemo
 
-import android.content.Context
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import com.zxy.zxydialog.BottomSheetDialogUtils
-import com.zxy.zxydialog.PopWindowUtils
-import com.zxy.zxydialog.TToast
-import com.zxy.zxydialog.snackbar.ZToast
-import com.zxy.zxydialog.tools.AnimatorEnum
-import com.zxy.zxydialog.tools.Applications
-import com.zxy.zxydialog.tools.DecimalTools
-import com.zxy.zxydialog.tools.LoadingTool
-import com.zxy.zxydialog.zxing.ZXingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -49,6 +37,19 @@ class MainActivity : AppCompatActivity() {
         //跳转到扫码
         btcnScan.setOnClickListener {
             startNewActivity<QRcodeActivity>()
+        }
+
+        btnAnimatorShow.setOnClickListener {
+            val animation: Animation =
+                AnimationUtils.loadAnimation(this, R.anim.zxt_dialog_enter_anim_fold_right)
+            vAnimator.visibility = View.VISIBLE
+            vAnimator.startAnimation(animation)
+        }
+        btnAnimatorHide.setOnClickListener {
+            val animation: Animation =
+                AnimationUtils.loadAnimation(this, R.anim.zxt_dialog_exit_anim_fold_right)
+            vAnimator.startAnimation(animation)
+            vAnimator.visibility = View.GONE
         }
 
 
