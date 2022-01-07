@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="zxy_dialog_cancel">取消</string>
-    <string name="zxy_dialog_config">确认</string>
-    <string name="zxy_no_view">没有设置setView的布局</string>
-    <string name="zxy_loading">加载中...</string>
-    <string name="zxy_qrcode_photo">从相册中选择二维码</string>
+    <string name="zxy_dialog_cancel">Cancel</string>
+    <string name="zxy_dialog_config">Confirm</string>
+    <string name="zxy_no_view">Do not set the layout of setView</string>
+    <string name="zxy_loading">Loading...</string>
+    <string name="zxy_qrcode_photo">Select the QR code from the album</string>
 </resources>
