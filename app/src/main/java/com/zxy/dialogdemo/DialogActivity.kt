@@ -3,6 +3,7 @@ package com.zxy.dialogdemo
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.TToast
@@ -26,6 +27,11 @@ class DialogActivity : AppCompatActivity() {
         btnDialog.setOnClickListener {
             var alertDialogUtils = AlertDialogUtils.build(this)
                 .setValues("Title", "Content")
+                .OnDispatchTouchEvent(object :AlertDialogUtils.OnDispatchTouchEvent{
+                    override fun dispatchTouchEvent(ev: MotionEvent) {
+
+                    }
+                })
                 .OnClickListener { view, alertDialogUtils ->
                     when (view.id) {
                         R.id.tvDialogConfig -> {
