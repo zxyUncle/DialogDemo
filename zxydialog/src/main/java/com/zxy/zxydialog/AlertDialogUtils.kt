@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -12,6 +13,7 @@ import android.widget.EditText
 import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.Applications
 import kotlinx.android.synthetic.main.zxy_alert_dialog.view.*
+import java.lang.RuntimeException
 
 
 /**
@@ -29,7 +31,8 @@ class AlertDialogUtils private constructor() {
     var alertDilaogBuilder: AlertDialog.Builder? = null    // AlertDilaog.Builder
     var listView: MutableList<Int>? = null
     var transparency: Float = 0.5f                              // 透明度
-
+    private lateinit var build: Builder
+    lateinit var onDispatchTouchEvent: OnDispatchTouchEvent
 
     companion object {
         @JvmStatic
@@ -38,21 +41,33 @@ class AlertDialogUtils private constructor() {
         }
     }
 
+    interface OnDispatchTouchEvent{
+        fun dispatchTouchEvent(ev: MotionEvent)
+    }
+
+
     class Builder(mContext: Activity) {
         var mContext = mContext
         var alertDialogUtils = AlertDialogUtils()
         var animator: Int? = null
         var title: String? = null
         var content: String? = null
-        var fullScreen:Boolean = false
+        var fullScreen: Boolean = false
         var editTextId: Int? = null
         var onDismissListener: DialogInterface.OnDismissListener? = null
         var onCancelListener: DialogInterface.OnCancelListener? = null
 
-        interface OnShowListener {
-            fun onShow(alertDialogUtils: AlertDialogUtils)
-        }
+        class MyAlertDialog: AlertDialog {
+            lateinit var alertDialogUtils:AlertDialogUtils
+            constructor(context: Context,alertDialogUtils:AlertDialogUtils):super(context){
+                this.alertDialogUtils = alertDialogUtils
+            }
 
+            override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+                alertDialogUtils.onDispatchTouchEvent.dispatchTouchEvent(ev)
+                return super.dispatchTouchEvent(ev)
+            }
+        }
         /**
          * 设置布局
          * @param layoutView View
@@ -71,8 +86,15 @@ class AlertDialogUtils private constructor() {
             return this
         }
 
-        fun isfullScreen(fullScreen: Boolean){
-            this.fullScreen=fullScreen
+        fun isfullScreen(fullScreen: Boolean) {
+            this.fullScreen = fullScreen
+        }
+
+        /**
+         * 扫码、全屏等监听
+         */
+        fun setOnDispatchTouchEvent(onDispatchTouchEvent:OnDispatchTouchEvent){
+            alertDialogUtils.onDispatchTouchEvent = onDispatchTouchEvent
         }
 
         /**
@@ -169,7 +191,7 @@ class AlertDialogUtils private constructor() {
             callBack(alertDialogUtils)
         }
 
-        fun show(){
+        fun show() {
             if (alertDialogUtils.alertDilaogBuilder == null) {
                 OnClickListener()
             }
@@ -185,6 +207,7 @@ class AlertDialogUtils private constructor() {
                         or View.SYSTEM_UI_FLAG_IMMERSIVE
             )
         }
+
         /**
          * 创建自定义布局的AlertDialog
          */
