@@ -1,10 +1,12 @@
-package com.zxy.dialogdemo
+package com.zxy.dialogdemo.activity
 
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
+import com.zxy.dialogdemo.R
+import com.zxy.dialogdemo.manager.DialogManager
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.TToast
 import com.zxy.zxydialog.tools.AnimatorEnum
@@ -25,22 +27,7 @@ class DialogActivity : AppCompatActivity() {
 
     private fun initView() {
         btnDialog.setOnClickListener {
-            var alertDialogUtils = AlertDialogUtils.build(this)
-                .setValues("Title", "Content")
-                .OnDispatchTouchEvent(object :AlertDialogUtils.OnDispatchTouchEvent{
-                    override fun dispatchTouchEvent(ev: MotionEvent) {
-
-                    }
-                })
-                .OnClickListener { view, alertDialogUtils ->
-                    when (view.id) {
-                        R.id.tvDialogConfig -> {
-                        }
-                        R.id.tvDialogCancel -> {
-                        }
-                    }
-                    alertDialogUtils.dismiss()
-                }.show()
+           DialogManager.showCustom(this)
         }
 
         btnDialog1.setOnClickListener {

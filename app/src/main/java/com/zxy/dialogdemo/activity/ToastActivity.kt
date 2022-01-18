@@ -1,8 +1,9 @@
-package com.zxy.dialogdemo
+package com.zxy.dialogdemo.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.zxy.dialogdemo.R
 import com.zxy.zxydialog.TToast
 import com.zxy.zxydialog.snackbar.ZToast
 import com.zxy.zxydialog.tools.Applications

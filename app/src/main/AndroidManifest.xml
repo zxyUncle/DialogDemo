@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BottomSheetDialogActivity"></activity>
-        <activity android:name=".ToastActivity" />
-        <activity android:name=".PopWindowActivity" />
-        <activity android:name=".QRcodeActivity" />
-        <activity android:name=".DialogActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.BottomSheetDialogActivity"></activity>
+        <activity android:name=".activity.ToastActivity" />
+        <activity android:name=".activity.PopWindowActivity" />
+        <activity android:name=".activity.QRcodeActivity" />
+        <activity android:name=".activity.DialogActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

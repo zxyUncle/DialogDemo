@@ -1,8 +1,9 @@
-package com.zxy.dialogdemo
+package com.zxy.dialogdemo.activity
 
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
+import com.zxy.dialogdemo.R
 import com.zxy.zxydialog.PopWindowUtils
 import com.zxy.zxydialog.tools.AnimatorEnum
 import kotlinx.android.synthetic.main.activity_pop_window.*

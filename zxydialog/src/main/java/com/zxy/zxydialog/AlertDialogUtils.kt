@@ -32,7 +32,7 @@ class AlertDialogUtils private constructor() {
     var listView: MutableList<Int>? = null
     var transparency: Float = 0.5f                              // 透明度
     var fullScreen: Boolean = false
-    var onDispatchTouchEvent: OnDispatchTouchEvent?=null
+    var onDispatchTouchEvent: OnDispatchTouchEvent? = null
     lateinit var mContext: Activity
 
     companion object {
@@ -204,17 +204,19 @@ class AlertDialogUtils private constructor() {
         /**
          * Dilaog 创建完成显示
          */
-        fun show(callBack: ((AlertDialogUtils) -> Unit) = {}) {
+        fun show(callBack: ((AlertDialogUtils) -> Unit) = {}): AlertDialogUtils {
             if (alertDialogUtils.dialog == null) {
                 OnClickListener()
             }
             callBack(alertDialogUtils)
+            return alertDialogUtils
         }
 
-        fun show() {
+        fun show(): AlertDialogUtils {
             if (alertDialogUtils.dialog == null) {
                 OnClickListener()
             }
+            return alertDialogUtils
         }
 
 

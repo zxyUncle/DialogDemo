@@ -1,10 +1,8 @@
-package com.zxy.dialogdemo
+package com.zxy.dialogdemo.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
-import android.widget.Toast
+import com.zxy.dialogdemo.R
 import com.zxy.zxydialog.BottomSheetDialogUtils
 import com.zxy.zxydialog.TToast
 import kotlinx.android.synthetic.main.activity_bottom_sheet_dialog.*

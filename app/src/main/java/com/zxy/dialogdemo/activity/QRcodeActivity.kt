@@ -1,4 +1,4 @@
-package com.zxy.dialogdemo
+package com.zxy.dialogdemo.activity
 
 import android.graphics.Bitmap
 import android.os.Bundle

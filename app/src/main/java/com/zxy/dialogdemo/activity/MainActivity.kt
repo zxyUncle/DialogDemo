@@ -1,10 +1,12 @@
-package com.zxy.dialogdemo
+package com.zxy.dialogdemo.activity
 
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import com.zxy.dialogdemo.R
+import com.zxy.dialogdemo.startNewActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
