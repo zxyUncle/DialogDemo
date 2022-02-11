@@ -105,8 +105,9 @@ class AlertDialogUtils private constructor() {
             return this
         }
 
-        fun isfullScreen(fullScreen: Boolean) {
+        fun setfullScreen(fullScreen: Boolean): Builder {
             alertDialogUtils.fullScreen = fullScreen
+            return this
         }
 
         /**
