@@ -53,7 +53,6 @@ class AlertDialogUtils private constructor() {
             context, themeResId
         ) {
             this.alertDialogUtils = alertDialogUtils
-            fullScreenShow()
         }
 
         override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -62,6 +61,13 @@ class AlertDialogUtils private constructor() {
             }
             fullScreenShow()
             return super.dispatchTouchEvent(ev)
+        }
+
+        override fun show() {
+            if (alertDialogUtils.fullScreen)
+                this.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+            super.show()
+            fullScreenShow()
         }
 
         fun fullScreenShow() {
@@ -105,8 +111,9 @@ class AlertDialogUtils private constructor() {
             return this
         }
 
-        fun isfullScreen(fullScreen: Boolean) {
+        fun setFullScreen(fullScreen: Boolean) : Builder{
             alertDialogUtils.fullScreen = fullScreen
+            return this
         }
 
         /**
@@ -360,6 +367,7 @@ class AlertDialogUtils private constructor() {
                     or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                     or View.SYSTEM_UI_FLAG_IMMERSIVE
         )
+        mContext.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 
 
