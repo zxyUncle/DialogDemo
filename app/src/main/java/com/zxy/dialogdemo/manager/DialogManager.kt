@@ -13,6 +13,7 @@ object DialogManager {
     fun showCustom(mContext:Activity){
         AlertDialogUtils.build(mContext)
             .setValues("Title", "Content")
+            .setfullScreen(true)
             .OnDispatchTouchEvent(object : AlertDialogUtils.OnDispatchTouchEvent{
                 override fun dispatchTouchEvent(ev: MotionEvent) {
 

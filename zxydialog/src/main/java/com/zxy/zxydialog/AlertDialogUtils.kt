@@ -243,6 +243,7 @@ class AlertDialogUtils private constructor() {
             layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
             window?.attributes = layoutParams
             alertDialogUtils.dialog?.show()
+            alertDialogUtils.dialog?.fullScreenShow()
 
             if (editTextId != null) {
                 alertDialogUtils.layoutView?.postDelayed({

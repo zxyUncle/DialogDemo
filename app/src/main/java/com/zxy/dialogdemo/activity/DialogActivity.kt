@@ -36,6 +36,7 @@ class DialogActivity : AppCompatActivity() {
                 .setTransparency(0.2f)//可选                                  默认0.2f
                 .setCancelable(true) //可选                                   默认true
                 .setEditFocus(R.id.tvDialgContent)
+                .setfullScreen(true)
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
                 .setOnDismissListener(DialogInterface.OnDismissListener {
