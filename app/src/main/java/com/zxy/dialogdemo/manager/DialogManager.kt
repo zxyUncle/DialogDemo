@@ -13,7 +13,7 @@ object DialogManager {
     fun showCustom(mContext:Activity){
         AlertDialogUtils.build(mContext)
             .setValues("Title", "Content")
-            .setfullScreen(true)
+            .setFullScreen(true)
             .OnDispatchTouchEvent(object : AlertDialogUtils.OnDispatchTouchEvent{
                 override fun dispatchTouchEvent(ev: MotionEvent) {
 
@@ -22,6 +22,7 @@ object DialogManager {
             .OnClickListener { view, alertDialogUtils ->
                 when (view.id) {
                     R.id.tvDialogConfig -> {
+
                     }
                     R.id.tvDialogCancel -> {
                     }
