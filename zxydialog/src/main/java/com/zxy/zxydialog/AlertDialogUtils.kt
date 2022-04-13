@@ -158,7 +158,7 @@ class AlertDialogUtils private constructor() {
          * 设置销毁的事件
          * @param viewId IntArray
          */
-        fun setOnDismissListener(listener: DialogInterface.OnDismissListener): Builder {
+        fun setOnDismissListeners(listener: DialogInterface.OnDismissListener): Builder {
             onDismissListener = listener
             return this
         }
@@ -167,7 +167,7 @@ class AlertDialogUtils private constructor() {
          * 设置销毁的事件
          * @param viewId IntArray
          */
-        fun setOnCancelListener(listener: DialogInterface.OnCancelListener): Builder {
+        fun setOnCancelListeners(listener: DialogInterface.OnCancelListener): Builder {
             onCancelListener = listener
             return this
         }
