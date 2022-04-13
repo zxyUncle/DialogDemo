@@ -32,6 +32,7 @@ class AlertDialogUtils private constructor() {
     var listView: MutableList<Int>? = null
     var transparency: Float = 0.5f                              // 透明度
     var fullScreen: Boolean = false
+    var touchOutside: Boolean = false                     //是否可以触摸外部
     var onDispatchTouchEvent: OnDispatchTouchEvent? = null
     lateinit var mContext: Activity
 
@@ -83,6 +84,7 @@ class AlertDialogUtils private constructor() {
         var title: String? = null
         var content: String? = null
         var editTextId: Int? = null
+
         var onDismissListener: DialogInterface.OnDismissListener? = null
         var onCancelListener: DialogInterface.OnCancelListener? = null
 
@@ -113,6 +115,11 @@ class AlertDialogUtils private constructor() {
 
         fun setFullScreen(fullScreen: Boolean) : Builder{
             alertDialogUtils.fullScreen = fullScreen
+            return this
+        }
+        //是否可以触摸外部
+        fun setCanceledOnTouchOutside(touchOutside: Boolean) : Builder{
+            alertDialogUtils.touchOutside = touchOutside
             return this
         }
 
@@ -243,6 +250,7 @@ class AlertDialogUtils private constructor() {
             }
             alertDialogUtils?.dialog?.setContentView(alertDialogUtils.layoutView!!)
             alertDialogUtils.dialog?.setCancelable(alertDialogUtils.cancelable)
+            alertDialogUtils.dialog?.setCanceledOnTouchOutside(alertDialogUtils.touchOutside)
             //设置动画
             var window = alertDialogUtils.dialog?.window
             var layoutParams = window?.attributes
@@ -299,6 +307,7 @@ class AlertDialogUtils private constructor() {
             }
             alertDialogUtils?.dialog?.setContentView(alertDialogUtils.layoutView!!)
             alertDialogUtils.dialog?.setCancelable(alertDialogUtils.cancelable)
+            alertDialogUtils.dialog?.setCanceledOnTouchOutside(alertDialogUtils.touchOutside)
             //设置动画
             var window = alertDialogUtils.dialog?.window
             var layoutParams = window?.attributes
