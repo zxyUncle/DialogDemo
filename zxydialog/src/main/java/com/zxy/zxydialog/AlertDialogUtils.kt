@@ -28,7 +28,7 @@ import java.lang.RuntimeException
 class AlertDialogUtils private constructor() {
     var layoutView: View? = null                           //Dialog的布局文件
     private var cancelable: Boolean = true                          //是否可以取消  true可以
-    var dialog: MyDialog? = null                        // AlertDilaog
+    var dialog: BaseDialog? = null                        // AlertDilaog
     var listView: MutableList<Int>? = null
     var transparency: Float = 0.5f                              // 透明度
     var fullScreen: Boolean = false
@@ -45,36 +45,6 @@ class AlertDialogUtils private constructor() {
 
     interface OnDispatchTouchEvent {
         fun dispatchTouchEvent(ev: MotionEvent)
-    }
-
-    class MyDialog : Dialog {
-        var alertDialogUtils: AlertDialogUtils
-
-        constructor(context: Context, themeResId: Int, alertDialogUtils: AlertDialogUtils) : super(
-            context, themeResId
-        ) {
-            this.alertDialogUtils = alertDialogUtils
-        }
-
-        override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-            alertDialogUtils.onDispatchTouchEvent.let {
-                alertDialogUtils.onDispatchTouchEvent?.dispatchTouchEvent(ev)
-            }
-            fullScreenShow()
-            return super.dispatchTouchEvent(ev)
-        }
-
-        override fun show() {
-            if (alertDialogUtils.fullScreen)
-                this.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-            super.show()
-            fullScreenShow()
-        }
-
-        fun fullScreenShow() {
-            if (alertDialogUtils.fullScreen)
-                alertDialogUtils.bottomNavInVisible()
-        }
     }
 
     class Builder {
@@ -241,7 +211,7 @@ class AlertDialogUtils private constructor() {
             if (alertDialogUtils.dialog != null) {
                 alertDialogUtils.dismiss()
             }
-            alertDialogUtils.dialog = MyDialog(mContext, R.style.zxy_MyDilog, alertDialogUtils)
+            alertDialogUtils.dialog = BaseDialog(mContext, R.style.zxy_MyDilog, alertDialogUtils)
             if (alertDialogUtils.layoutView == null) {//自带的dialog
                 setView(R.layout.zxy_alert_dialog)
                 setOnClick(R.id.tvDialogCancel, R.id.tvDialogConfig)
@@ -257,7 +227,6 @@ class AlertDialogUtils private constructor() {
             layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
             window?.attributes = layoutParams
             alertDialogUtils.dialog?.show()
-            alertDialogUtils.dialog?.fullScreenShow()
 
             if (editTextId != null) {
                 alertDialogUtils.layoutView?.postDelayed({
@@ -298,7 +267,7 @@ class AlertDialogUtils private constructor() {
             if (alertDialogUtils.dialog != null) {
                 alertDialogUtils.dismiss()
             }
-            alertDialogUtils.dialog = MyDialog(mContext, R.style.zxy_MyDilog, alertDialogUtils)
+            alertDialogUtils.dialog = BaseDialog(mContext, R.style.zxy_MyDilog, alertDialogUtils)
             if (alertDialogUtils.layoutView == null) {//自带的dialog
                 setView(R.layout.zxy_alert_dialog)
                 setOnClick(R.id.tvDialogCancel, R.id.tvDialogConfig)

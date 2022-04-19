@@ -63,6 +63,7 @@ class DialogActivity : AppCompatActivity() {
                 .setView(R.layout.dialog_scrollview)//必选                         自定义布局的View
                 .setTransparency(0.2f)//可选                                  默认0.2f
                 .setCancelable(true) //可选                                   默认true
+                .setFullScreen(true)
                 .setEditFocus(R.id.tvDialgContent)
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfirm) //可选  Dialog中的点击事件
