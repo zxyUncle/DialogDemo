@@ -34,8 +34,8 @@ class DialogActivity : AppCompatActivity() {
             val alertDialogUtils = AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)//必选                         自定义布局的View
                 .setTransparency(0.2f)//可选                                  默认0.2f
-                .setCancelable(true) //可选                                   默认true
-                .setCanceledOnTouchOutside(true)                              //触摸外部区域
+                .setCancelable(false) //可选                                   默认true
+                .setCanceledOnTouchOutside(false)                              //触摸外部区域
                 .setEditFocus(R.id.tvDialgContent)
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
