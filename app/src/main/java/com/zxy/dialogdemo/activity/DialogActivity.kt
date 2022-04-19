@@ -66,12 +66,7 @@ class DialogActivity : AppCompatActivity() {
                 .setFullScreen(true)
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfirm) //可选  Dialog中的点击事件
-                .setOnDismissListeners(object :DialogInterface.OnDismissListener{
-                    override fun onDismiss(p0: DialogInterface?) {
-                        Log.e("zxy", "onDismiss")
-                    }
-
-                })
+                .setOnDismissListeners { Log.e("zxy", "onDismiss") }
                 .OnClickListener { view, alertDialogUtils -> //必选                    点击事件的回调
                     when (view.id) {
                         R.id.tvDialogConfirm -> {
