@@ -65,7 +65,10 @@ class AlertDialogUtils private constructor() {
 
         override fun show() {
             if (alertDialogUtils.fullScreen)
-                this.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+                this.window?.setFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                );
             super.show()
             fullScreenShow()
         }
@@ -112,12 +115,13 @@ class AlertDialogUtils private constructor() {
             return this
         }
 
-        fun setFullScreen(fullScreen: Boolean) : Builder{
+        fun setFullScreen(fullScreen: Boolean): Builder {
             alertDialogUtils.fullScreen = fullScreen
             return this
         }
+
         //是否可以触摸外部
-        fun setCanceledOnTouchOutside(touchOutside: Boolean) : Builder{
+        fun setCanceledOnTouchOutside(touchOutside: Boolean): Builder {
             alertDialogUtils.touchOutside = touchOutside
             return this
         }
@@ -218,20 +222,16 @@ class AlertDialogUtils private constructor() {
          * Dilaog 创建完成显示
          */
         fun show(callBack: ((AlertDialogUtils) -> Unit) = {}): AlertDialogUtils {
-            if (!mContext.isDestroyed){
-                if (alertDialogUtils.dialog == null) {
-                    OnClickListener()
-                }
+            if (alertDialogUtils.dialog == null) {
+                OnClickListener()
             }
             callBack(alertDialogUtils)
             return alertDialogUtils
         }
 
         fun show(): AlertDialogUtils {
-            if (!mContext.isDestroyed) {
-                if (alertDialogUtils.dialog == null) {
-                    OnClickListener()
-                }
+            if (alertDialogUtils.dialog == null) {
+                OnClickListener()
             }
             return alertDialogUtils
         }
@@ -254,59 +254,61 @@ class AlertDialogUtils private constructor() {
             return alertDialogUtils
         }
 
-        private fun callBack(callBack: ((View, AlertDialogUtils) -> Unit) = { _: View, _: AlertDialogUtils -> }){
-            if (alertDialogUtils.dialog != null) {
-                alertDialogUtils.dismiss()
-            }
-            alertDialogUtils.dialog = MyDialog(
-                mContext,
-                R.style.zxy_MyDilog,
-                alertDialogUtils
-            )
-            if (alertDialogUtils.layoutView == null) {//自带的dialog
-                setView(R.layout.zxy_alert_dialog)
-                setOnClick(R.id.tvDialogCancel, R.id.tvDialogConfig)
-                alertDialogUtils.layoutView?.tvDialgTitle?.text = title
-                alertDialogUtils.layoutView?.tvDialgContent?.text = content
-            }
-            alertDialogUtils?.dialog?.setContentView(alertDialogUtils.layoutView!!)
-            alertDialogUtils.dialog?.setCancelable(alertDialogUtils.cancelable)
-            alertDialogUtils.dialog?.setCanceledOnTouchOutside(alertDialogUtils.touchOutside)
-            //设置动画
-            var window = alertDialogUtils.dialog?.window
-            var layoutParams = window?.attributes
-            layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
-            window?.attributes = layoutParams
-
-            alertDialogUtils.dialog?.fullScreenShow()
-            alertDialogUtils.dialog?.show()
-
-            if (editTextId != null) {
-                alertDialogUtils.layoutView?.postDelayed({
-                    showKeyboard(alertDialogUtils.layoutView?.findViewById(editTextId!!))
-                }, 100)
-            }
-
-            val lp = alertDialogUtils.dialog?.window!!.attributes
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT
-            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-            alertDialogUtils.dialog?.window!!.setDimAmount(alertDialogUtils.transparency)//设置黑色遮罩层的透明度
-            alertDialogUtils.dialog?.window!!.attributes = lp
-
-            if (alertDialogUtils.listView != null) {
-                for (index in alertDialogUtils.listView!!) {
-                    alertDialogUtils.layoutView!!.findViewById<View>(index)
-                        .setOnClickListener {
-                            callBack(it, alertDialogUtils)
-                        }
+        private fun callBack(callBack: ((View, AlertDialogUtils) -> Unit) = { _: View, _: AlertDialogUtils -> }) {
+            if (!mContext.isDestroyed) {
+                if (alertDialogUtils.dialog != null) {
+                    alertDialogUtils.dismiss()
                 }
-            }
+                alertDialogUtils.dialog = MyDialog(
+                    mContext,
+                    R.style.zxy_MyDilog,
+                    alertDialogUtils
+                )
+                if (alertDialogUtils.layoutView == null) {//自带的dialog
+                    setView(R.layout.zxy_alert_dialog)
+                    setOnClick(R.id.tvDialogCancel, R.id.tvDialogConfig)
+                    alertDialogUtils.layoutView?.tvDialgTitle?.text = title
+                    alertDialogUtils.layoutView?.tvDialgContent?.text = content
+                }
+                alertDialogUtils?.dialog?.setContentView(alertDialogUtils.layoutView!!)
+                alertDialogUtils.dialog?.setCancelable(alertDialogUtils.cancelable)
+                alertDialogUtils.dialog?.setCanceledOnTouchOutside(alertDialogUtils.touchOutside)
+                //设置动画
+                var window = alertDialogUtils.dialog?.window
+                var layoutParams = window?.attributes
+                layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
+                window?.attributes = layoutParams
 
-            if (onCancelListener != null) {
-                alertDialogUtils.dialog?.setOnCancelListener(onCancelListener)
-            }
-            if (onDismissListener != null) {
-                alertDialogUtils.dialog?.setOnDismissListener(onDismissListener)
+                alertDialogUtils.dialog?.fullScreenShow()
+                alertDialogUtils.dialog?.show()
+
+                if (editTextId != null) {
+                    alertDialogUtils.layoutView?.postDelayed({
+                        showKeyboard(alertDialogUtils.layoutView?.findViewById(editTextId!!))
+                    }, 100)
+                }
+
+                val lp = alertDialogUtils.dialog?.window!!.attributes
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+                alertDialogUtils.dialog?.window!!.setDimAmount(alertDialogUtils.transparency)//设置黑色遮罩层的透明度
+                alertDialogUtils.dialog?.window!!.attributes = lp
+
+                if (alertDialogUtils.listView != null) {
+                    for (index in alertDialogUtils.listView!!) {
+                        alertDialogUtils.layoutView!!.findViewById<View>(index)
+                            .setOnClickListener {
+                                callBack(it, alertDialogUtils)
+                            }
+                    }
+                }
+
+                if (onCancelListener != null) {
+                    alertDialogUtils.dialog?.setOnCancelListener(onCancelListener)
+                }
+                if (onDismissListener != null) {
+                    alertDialogUtils.dialog?.setOnDismissListener(onDismissListener)
+                }
             }
         }
 
@@ -332,7 +334,7 @@ class AlertDialogUtils private constructor() {
         }
     }
 
-    fun bottomNavInVisible(){
+    fun bottomNavInVisible() {
         //隐藏虚拟按键，并且全屏
         var decorView = dialog?.window?.decorView
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
