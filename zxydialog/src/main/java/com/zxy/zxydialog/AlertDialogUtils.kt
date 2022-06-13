@@ -77,7 +77,7 @@ class AlertDialogUtils private constructor() {
     }
 
     class Builder {
-        var mContext: Context
+        var mContext: Activity
         var alertDialogUtils: AlertDialogUtils
         var animator: Int? = null
         var title: String? = null
@@ -218,16 +218,20 @@ class AlertDialogUtils private constructor() {
          * Dilaog 创建完成显示
          */
         fun show(callBack: ((AlertDialogUtils) -> Unit) = {}): AlertDialogUtils {
-            if (alertDialogUtils.dialog == null) {
-                OnClickListener()
+            if (!mContext.isDestroyed){
+                if (alertDialogUtils.dialog == null) {
+                    OnClickListener()
+                }
             }
             callBack(alertDialogUtils)
             return alertDialogUtils
         }
 
         fun show(): AlertDialogUtils {
-            if (alertDialogUtils.dialog == null) {
-                OnClickListener()
+            if (!mContext.isDestroyed) {
+                if (alertDialogUtils.dialog == null) {
+                    OnClickListener()
+                }
             }
             return alertDialogUtils
         }
