@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -298,7 +299,11 @@ class AlertDialogUtils private constructor() {
                     for (index in alertDialogUtils.listView!!) {
                         alertDialogUtils.layoutView!!.findViewById<View>(index)
                             .setOnClickListener {
-                                callBack(it, alertDialogUtils)
+                                if (!mContext.isDestroyed) {
+                                    callBack(it, alertDialogUtils)
+                                }else{
+                                    Log.e("","当前activity已销毁")
+                                }
                             }
                     }
                 }
@@ -309,6 +314,8 @@ class AlertDialogUtils private constructor() {
                 if (onDismissListener != null) {
                     alertDialogUtils.dialog?.setOnDismissListener(onDismissListener)
                 }
+            }else{
+                Log.e("","当前activity已销毁")
             }
         }
 
