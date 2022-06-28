@@ -41,10 +41,6 @@ class AlertDialogUtils private constructor() {
         fun build(mContext: Activity): Builder {
             return Builder(mContext)
         }
-        @JvmStatic
-        fun build(mContext: Context): Builder {
-            return Builder(mContext as Activity)
-        }
     }
 
     interface OnDispatchTouchEvent {
