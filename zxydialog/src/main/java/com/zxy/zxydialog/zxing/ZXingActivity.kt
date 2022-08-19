@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.google.zxing.Result
 import com.google.zxing.client.result.ParsedResult
@@ -17,9 +18,13 @@ import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.mylhyl.zxing.scanner.OnScannerCompletionListener
 import com.mylhyl.zxing.scanner.decode.QRDecode
+import com.permissionx.guolindev.PermissionX
 import com.zxy.zxydialog.R
 import com.zxy.zxydialog.TToast
 import kotlinx.android.synthetic.main.activity_zxing.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 /**
@@ -103,14 +108,14 @@ open class ZXingActivity : AppCompatActivity(), OnScannerCompletionListener {
     /**
      * 重新扫码
      */
-    private fun backScan(delay:Long=2000) {
+    private fun backScan(delay: Long = 2000) {
         mScannerView.restartPreviewAfterDelay(delay)
     }
 
     /**
      * 解析图片二维码，条形码
      */
-    protected  fun decodeQR(imagePath: String) {
+    protected fun decodeQR(imagePath: String) {
         //成功取得照片
         QRDecode.decodeQR(imagePath) { rawResult, parsedResult, barcode ->
             executereslt(rawResult, parsedResult, barcode)
@@ -171,6 +176,39 @@ open class ZXingActivity : AppCompatActivity(), OnScannerCompletionListener {
                 }
             }
         }
+    }
+
+    fun FragmentActivity.requestPermission(
+        permissions: MutableList<String>,
+        onSuccess: () -> Unit,
+        onFailed: (MutableList<String>) -> Unit
+    ) {
+        var mContext = this
+        PermissionX.init(mContext)
+            .permissions(permissions)
+            .onExplainRequestReason { scope, deniedList ->
+                scope.showRequestReasonDialog(
+                    deniedList,
+                    "请同意这些权限，用于我们接下来的操作",
+                    "确定",
+                    "取消"
+                )
+            }
+            .onForwardToSettings { scope, deniedList ->
+                scope.showForwardToSettingsDialog(
+                    deniedList,
+                    "您需要在设置中手动允许必要的权限，否则不能使用这部分功能哦!",
+                    "确定",
+                    "取消"
+                )
+            }
+            .request { allGranted, grantedList, deniedList ->
+                if (allGranted) {//全部同意
+                    onSuccess()
+                } else {//
+                    onFailed(deniedList)
+                }
+            }
     }
 
 }
