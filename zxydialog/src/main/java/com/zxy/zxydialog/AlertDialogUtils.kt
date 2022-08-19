@@ -362,7 +362,6 @@ class AlertDialogUtils private constructor() {
         dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 
-
     fun dismiss() {
         if (dialog != null) {
             dialog!!.cancel()
