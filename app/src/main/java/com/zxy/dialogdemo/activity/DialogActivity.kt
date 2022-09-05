@@ -3,16 +3,16 @@ package com.zxy.dialogdemo.activity
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.EditText
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.LifecycleObserver
 import com.zxy.dialogdemo.R
 import com.zxy.dialogdemo.manager.DialogManager
 import com.zxy.zxydialog.AlertDialogUtils
 import com.zxy.zxydialog.TToast
 import com.zxy.zxydialog.tools.AnimatorEnum
 import kotlinx.android.synthetic.main.activity_dialog.*
-import java.lang.Exception
 
 /**
  * Created by zsf on 2021/4/1 14:30
@@ -20,10 +20,12 @@ import java.lang.Exception
  * *
  * ******************************************
  */
-class DialogActivity : AppCompatActivity() {
+class DialogActivity : ComponentActivity() , LifecycleObserver {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialog)
+
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -35,11 +37,12 @@ class DialogActivity : AppCompatActivity() {
 
     private fun initView() {
         btnDialog.setOnClickListener {
-           DialogManager.showCustom(this)
+            DialogManager.showCustom(this)
         }
 
+        var alertDialogUtils :AlertDialogUtils?=null
         btnDialog1.setOnClickListener {
-            val alertDialogUtils = AlertDialogUtils.build(this)
+            alertDialogUtils = AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_curse)//必选                         自定义布局的View
                 .setTransparency(0.2f)//可选                                  默认0.2f
                 .setCancelable(false) //可选                                   默认true
@@ -48,7 +51,7 @@ class DialogActivity : AppCompatActivity() {
                 .setAnimator(AnimatorEnum.TRAN_T.VALUE)//可选，               默认AnimatorEnum.ZOOM.VALUE
                 .setOnClick(R.id.tvDialogConfig, R.id.tvDialogCancel) //可选  Dialog中的点击事件
                 .setOnDismissListeners(DialogInterface.OnDismissListener {
-                    Log.e("zxy","setOnDismissListener")
+                    Log.e("zxy", "setOnDismissListener")
                 })
                 .OnClickListener { view, alertDialogUtils -> //必选                    点击事件的回调
                     when (view.id) {
@@ -62,10 +65,21 @@ class DialogActivity : AppCompatActivity() {
                         }
                     }
                 }
+                .setTimer(10) { time, alertDialogUtils ->
+                        var tvDialgContent =
+                            alertDialogUtils.layoutView!!.findViewById<EditText>(R.id.tvDialgContent)
+                        tvDialgContent.setText("$time")
+                        Log.e("zxy", "$time")
+                        if (time == 7) {
+                            finish()
+                        }
+
+                }
                 .show {
-                    Log.e("zxy","onShow")
+                    Log.e("zxy", "onShow")
                 }
         }
+
         btnDialog2.setOnClickListener {
             val alertDialogUtils = AlertDialogUtils.build(this)
                 .setView(R.layout.dialog_scrollview)//必选                         自定义布局的View
@@ -104,12 +118,12 @@ class DialogActivity : AppCompatActivity() {
 
     private fun bottomNavInVisible() {
         try {
-                (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE)
+            (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE)
         } catch (e: Exception) {
             e.printStackTrace()
         }

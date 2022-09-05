@@ -1,6 +1,5 @@
 package com.zxy.zxydialog
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -12,8 +11,11 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.ComponentActivity
 import com.zxy.zxydialog.tools.AnimatorEnum
 import com.zxy.zxydialog.tools.Applications
+import com.zxy.zxydialog.tools.CountDownTimerManager
+import com.zxy.zxydialog.tools.MyLifecycleActImp
 import kotlinx.android.synthetic.main.zxy_alert_dialog.view.*
 
 
@@ -26,6 +28,7 @@ import kotlinx.android.synthetic.main.zxy_alert_dialog.view.*
  * ******************************************
  */
 class AlertDialogUtils private constructor() {
+
     var layoutView: View? = null                           //Dialog的布局文件
     private var cancelable: Boolean = true                          //是否可以取消  true可以
     var dialog: MyDialog? = null                        // AlertDilaog
@@ -34,11 +37,15 @@ class AlertDialogUtils private constructor() {
     var fullScreen: Boolean = false
     var touchOutside: Boolean = false                     //是否可以触摸外部
     var onDispatchTouchEvent: OnDispatchTouchEvent? = null
-    lateinit var mContext: Activity
+    lateinit var mContext: ComponentActivity
 
     companion object {
+        /**
+         * 必须是ComponentActivity 子类
+         * 可以是AppCompatActivity、FragmentActivity等
+         */
         @JvmStatic
-        fun build(mContext: Activity): Builder {
+        fun build(mContext: ComponentActivity): Builder {
             return Builder(mContext)
         }
     }
@@ -69,7 +76,7 @@ class AlertDialogUtils private constructor() {
                 this.window?.setFlags(
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                );
+                )
             super.show()
             fullScreenShow()
         }
@@ -81,7 +88,7 @@ class AlertDialogUtils private constructor() {
     }
 
     class Builder {
-        var mContext: Activity
+        var mContext: ComponentActivity
         var alertDialogUtils: AlertDialogUtils
         var animator: Int? = null
         var title: String? = null
@@ -92,10 +99,21 @@ class AlertDialogUtils private constructor() {
         var onCancelListener: DialogInterface.OnCancelListener? = null
 
 
-        constructor(context: Activity) {
+        constructor(context: ComponentActivity) {
             alertDialogUtils = AlertDialogUtils()
             alertDialogUtils.mContext = context
             mContext = context
+            onLifecycleListener()
+        }
+
+        private fun onLifecycleListener() {
+            val myLocationListener =
+                MyLifecycleActImp(object : MyLifecycleActImp.LifecycleListener {
+                    override fun onResult() {
+                        alertDialogUtils!!.dismiss()
+                    }
+                })
+            mContext.lifecycle.addObserver(myLocationListener)
         }
 
         /**
@@ -220,6 +238,24 @@ class AlertDialogUtils private constructor() {
         }
 
         /**
+         * 倒计时
+         * @param time 单位秒
+         */
+        fun setTimer(time: Long, callBack: (Int, AlertDialogUtils) -> Unit): Builder {
+            CountDownTimerManager.getInstance()
+                .startCountDownTimer(time, object : CountDownTimerManager.CountDownTimerListener {
+                    override fun onTick(second: Int) {
+                        callBack(second, alertDialogUtils)
+                    }
+
+                    override fun onFinish() {
+                        alertDialogUtils.dismiss()
+                    }
+                })
+            return this
+        }
+
+        /**
          * Dilaog 创建完成显示
          */
         fun show(callBack: ((AlertDialogUtils) -> Unit) = {}): AlertDialogUtils {
@@ -271,12 +307,12 @@ class AlertDialogUtils private constructor() {
                     alertDialogUtils.layoutView?.tvDialgTitle?.text = title
                     alertDialogUtils.layoutView?.tvDialgContent?.text = content
                 }
-                alertDialogUtils?.dialog?.setContentView(alertDialogUtils.layoutView!!)
+                alertDialogUtils.dialog?.setContentView(alertDialogUtils.layoutView!!)
                 alertDialogUtils.dialog?.setCancelable(alertDialogUtils.cancelable)
                 alertDialogUtils.dialog?.setCanceledOnTouchOutside(alertDialogUtils.touchOutside)
                 //设置动画
-                var window = alertDialogUtils.dialog?.window
-                var layoutParams = window?.attributes
+                val window = alertDialogUtils.dialog?.window
+                val layoutParams = window?.attributes
                 layoutParams?.windowAnimations = animator ?: AnimatorEnum.ZOOM.VALUE
                 window?.attributes = layoutParams
 
@@ -301,8 +337,8 @@ class AlertDialogUtils private constructor() {
                             .setOnClickListener {
                                 if (!mContext.isDestroyed) {
                                     callBack(it, alertDialogUtils)
-                                }else{
-                                    Log.e("","当前activity已销毁")
+                                } else {
+                                    Log.e("", "当前activity已销毁")
                                 }
                             }
                     }
@@ -314,8 +350,8 @@ class AlertDialogUtils private constructor() {
                 if (onDismissListener != null) {
                     alertDialogUtils.dialog?.setOnDismissListener(onDismissListener)
                 }
-            }else{
-                Log.e("","当前activity已销毁")
+            } else {
+                Log.e("", "当前activity已销毁")
             }
         }
 
