@@ -36,10 +36,6 @@ class MainActivity : AppCompatActivity() {
         btnBottomSheetDialog.setOnClickListener {
             startNewActivity<BottomSheetDialogActivity>()
         }
-        //跳转到扫码
-        btcnScan.setOnClickListener {
-            startNewActivity<QRcodeActivity>()
-        }
 
         btnAnimatorShow.setOnClickListener {
             val animation: Animation =
