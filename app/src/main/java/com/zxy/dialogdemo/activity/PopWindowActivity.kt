@@ -1,6 +1,7 @@
 package com.zxy.dialogdemo.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.ViewParent
@@ -111,6 +112,8 @@ class PopWindowActivity : AppCompatActivity() {
                     {
 
                     }
+                },{
+                  Log.e("zxy","onView")
                 }, { //点击外部销毁Pop的监听
 
                 })

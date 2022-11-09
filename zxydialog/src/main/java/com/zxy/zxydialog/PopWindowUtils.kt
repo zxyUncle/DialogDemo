@@ -154,11 +154,15 @@ class PopWindowUtils {
 
         /**
          * 相对于View的位置
+         * @param viewLocation 相对的View的位置
+         * @param onView 初始化View
+         * @param onDismiss 销毁监听
          */
         @SuppressLint("ClickableViewAccessibility")
         fun showAsDropDown(
             viewLocation: View,
-            block: (View, PopWindowUtils) -> Unit,
+            onClick: ((View, PopWindowUtils) -> Unit),
+            onView: ((PopWindowUtils) -> Unit) = {},
             onDismiss: ((PopWindowUtils) -> Unit) = {}
         ): PopWindowUtils {
             if (popupWindowUtils.layoutView == null) {
@@ -218,7 +222,7 @@ class PopWindowUtils {
                         try {
                             popupWindowUtils.layoutView!!.findViewById<View>(popupWindowUtils.listView!![index])
                                 .setOnClickListener {
-                                    block(it, popupWindowUtils)
+                                    onClick(it, popupWindowUtils)
                                 }
                         } catch (e: Exception) {
                             Log.e("", "不存在的布局Id")
@@ -233,6 +237,7 @@ class PopWindowUtils {
                     mContext?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
                     onDismiss(popupWindowUtils)
                 }
+                onView(popupWindowUtils)
 
             }
             return popupWindowUtils
