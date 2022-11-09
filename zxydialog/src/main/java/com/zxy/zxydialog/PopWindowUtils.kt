@@ -46,8 +46,8 @@ class PopWindowUtils {
         var offsetHeight: Int = 0
         var transparency: Float = 0.8f
         var millisInFuture: Long? = null
-        var popWidth = WRAP
-        var popHeight = WRAP
+        private var popWidth = WRAP
+        private var popHeight = WRAP
 
         private val mTimer by lazy {
             object : CountDownTimer(millisInFuture ?: 0, 1000) {
@@ -77,6 +77,16 @@ class PopWindowUtils {
          */
         fun setView(layoutView: View): Builder {
             popupWindowUtils.layoutView = layoutView
+            return this
+        }
+        //ViewGroup.LayoutParams.MATCH_PARENT
+        fun setHeight(height: Int): Builder {
+            this.popHeight = height
+            return this
+        }
+        //ViewGroup.LayoutParams.MATCH_PARENT
+        fun setWidth(width: Int): Builder {
+            this.popWidth = width
             return this
         }
 

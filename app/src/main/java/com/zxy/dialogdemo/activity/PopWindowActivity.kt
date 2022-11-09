@@ -2,6 +2,8 @@ package com.zxy.dialogdemo.activity
 
 import android.os.Bundle
 import android.view.Gravity
+import android.view.ViewGroup
+import android.view.ViewParent
 import androidx.appcompat.app.AppCompatActivity
 import com.zxy.dialogdemo.R
 import com.zxy.zxydialog.PopWindowUtils
@@ -97,6 +99,7 @@ class PopWindowActivity : AppCompatActivity() {
         btnPopViewTop.setOnClickListener {
             var popWindowUtils = PopWindowUtils.build(this)
                 .setView(R.layout.pop_curse) //必选                              设置布局
+                .setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
                 .setGravity(Gravity.TOP, 0, 0)//可选      设置方向及宽高偏移值,默认TOP
                 .setTransparencys(1f)//可选：                                      默认0.5    0为全黑  1全透明
                 .isFocusable(false)//可选：                            默认true

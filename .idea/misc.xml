@@ -4,14 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/workspace_module/DialogDemo/app/src/main/res/layout/activity_dialog.xml" value="0.16197916666666667" />
+        <entry key="..\:/Android/workspace_module/DialogDemo/app/src/main/res/layout/activity_pop_window.xml" value="0.16666666666666666" />
         <entry key="..\:/Android/workspace_module/DialogDemo/zxydialog/src/main/res/layout/dialog_curse.xml" value="0.16666666666666666" />
         <entry key="..\:/Android/workspace_module/DialogDemo/zxydialog/src/main/res/layout/dialog_scrollview.xml" value="0.15208333333333332" />
         <entry key="..\:/Android/workspace_module/DialogDemo/zxydialog/src/main/res/layout/dialog_test.xml" value="0.15208333333333332" />
+        <entry key="..\:/Android/workspace_module/DialogDemo/zxydialog/src/main/res/layout/pop_curse.xml" value="0.15208333333333332" />
         <entry key="..\:/Android/workspace_module/DialogDemo/zxydialog/src/main/res/layout/zxy_alert_dialog.xml" value="0.22" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
