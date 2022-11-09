@@ -112,8 +112,6 @@ class PopWindowActivity : AppCompatActivity() {
                     {
 
                     }
-                },{
-                  Log.e("zxy","onView")
                 }, { //点击外部销毁Pop的监听
 
                 })
